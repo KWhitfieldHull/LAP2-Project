@@ -29,6 +29,7 @@ async function show(req, res) {
 async function create(req, res) {
     try {
         const data = req.body
+        
         const newItem = await Item.create(data);
         res.json(newItem);
     } catch (err) {
