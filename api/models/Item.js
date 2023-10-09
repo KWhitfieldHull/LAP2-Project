@@ -13,7 +13,7 @@ class Item {
     }
 
     static async getAll() {
-        const response = await db.query("SELECT * FROM items_table ORDER BY entry_id;");
+        const response = await db.query("SELECT * FROM items_table ORDER BY name;");
         if (response.rows.length === 0) {
             throw new Error("No items available.")
         }
