@@ -41,11 +41,14 @@ async function update(req, res) {
     try {
         const id = parseInt(req.params.id);
         const data = req.body;
-        const item = await Item.getOneById(id)
-
-        const result = await item.update(data);
-
-        res.status(200).json(result);
+        const itemToUpdate = await Item.getOneById(id)
+        req.body.name ||= itemToUpdate.name
+        req.body.user_id ||= itemToUpdate.user_id
+        req.body.image_url ||= itemToUpdate.image_url
+        req.body.description ||= itemToUpdate.description
+        req.body.category ||= itemToUpdate.category
+        const updatedItem = await Item.update(data, id);
+        res.status(200).json(updatedItem);
     } catch (err) {
         res.status(404).json({ "error": err.message })
     }
