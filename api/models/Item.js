@@ -55,8 +55,8 @@ class Item {
         return new Item(response.rows[0]);
     }
 
-    async destroy() {
-        const response = await db.query('DELETE FROM items_table WHERE item_id = $1 RETURNING *;', [this.id]);
+    async destroy(id) {
+        const response = await db.query('DELETE FROM items_table WHERE item_id = $1 RETURNING *;', [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to delete item.")
         }
