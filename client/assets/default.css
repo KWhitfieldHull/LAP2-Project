@@ -1,18 +1,25 @@
-body{
+body {
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('./img/diary.jpg');
     /* margin: 40px auto; */
     /* max-width: 650px; */
     line-height: 1.6;
-    font-size: 18px;
+    font-size: 16px;
     color: #444444;
-    padding: 0rem 1rem;
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
 
 }
 
-h1,h2,h3 {
+a.nav-link.active {
+    border-bottom: 1px solid black;
+}
+
+
+h1, h2, h3 {
     line-height: 1.2
 }
 
@@ -25,6 +32,7 @@ fieldset {
     flex-direction: column;
     padding: 0.2rem;
 }
+
 .scroll {
     overflow-y: scroll;
     height: 200px;
@@ -37,26 +45,34 @@ fieldset {
     align-items: center;
 }
 
-section {
-    
+/* section {
+
     position: absolute;
     left: 50%;
     top: 50%;
     width: 70%;
     min-height: 50%;
     transform: translate(-50%, -50%);
-  
+
     padding: 1rem;
-  
+
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 1rem;
-  
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+} */
 
-  .custom {
+.custom {
     list-style: none;
-  }
+}
+
+.btn-add {
+    background-color: #0CB0B3;
+}
+
+.btn-add:hover {
+    background-color: #21e0e3;
+}
