@@ -27,22 +27,25 @@ async function show(req, res) {
     }
 }
 
-async function create(req, res) {
+const create = async (req, res) => {
     try {
-        const data = req.body
-        
-        const newItem = await Item.create(data);
-        res.json(newItem);
+      const data = req.body
+      const newItem = await Item.create(data)
+      res.status(201).send({ data: newItem })
     } catch (err) {
-        res.status(404).json({ "error": err.message })
+      res.status(400).send({ "error": err.message })
     }
-}
+  }
+
+
+
 
 async function update(req, res) {
     try {
         const id = parseInt(req.params.id);
         const data = req.body;
-        const itemToUpdate = await Item.getOneById(id)
+       const itemToUpdate = await Item.getOneById(id)
+       
         req.body.name ||= itemToUpdate.name
         req.body.user_id ||= itemToUpdate.user_id
         req.body.image_url ||= itemToUpdate.image_url

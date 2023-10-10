@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRouter = require('./routers/user');
 const itemsRouter = require('./routers/items');
 const recycleRouter = require('./routers/recycle');
+const categoryRouter = require('./routers/category');
 //const pointRouter = require('./routers/point');
 
 
@@ -19,6 +20,7 @@ api.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 api.use("/users", userRouter);
 api.use("/items", itemsRouter);
 api.use("/recycle", recycleRouter);
+api.use("/categories", categoryRouter);
 //api.use("/account", pointRouter);
 
 
