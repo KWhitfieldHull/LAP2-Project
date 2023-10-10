@@ -1,13 +1,15 @@
 const showItemsButton = document.getElementById('showItemsButton')
 const resetItemsButton = document.getElementById('resetItemsButton')
 const itemsList = document.getElementById('itemsList')
-
+const logoutButton = document.getElementById("log-out")
 
 resetItemsButton.addEventListener('click', () => {
   const categoriesCheckboxed = document.querySelectorAll('.checkboxCategories');
   categoriesCheckboxed.forEach(checkbox => checkbox.checked = false)
 })
-
+logoutButton.addEventListener('click', () => {
+  localStorage.removeItem("token")
+})
 const listenItem = (id) => {
   let buttonId = `itemAddButton-${id}`
   let itemId = `item-${id}`;
