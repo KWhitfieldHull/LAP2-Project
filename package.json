@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
     "dev": "nodemon -L api/index.js",
     "setup-db1": "node api/database/setup.js",
     "setup-db2": "node api/database/setup_user.js"
@@ -20,6 +21,14 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "./__tests__/integration/config.js"
+
+    ]
   }
 }

@@ -26,6 +26,7 @@ class Item {
         if (response.rows.length != 1) {
             throw new Error("Unable to locate item.")
         }
+        
         return new Item(response.rows[0]);
     }
 

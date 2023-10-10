@@ -6,8 +6,8 @@ const itemsRouter = Router();
 
 itemsRouter.get('/', itemsController.index);
 itemsRouter.get('/:id', itemsController.show);
-itemsRouter.post('/newitem', authenticator, itemsController.create);
-itemsRouter.patch('/:id', authenticator, itemsController.update);
-itemsRouter.delete('/:id', authenticator, itemsController.destroy);
+itemsRouter.post('/newitem', itemsController.create);
+itemsRouter.patch('/:id', itemsController.update);
+itemsRouter.delete('/:id', itemsController.destroy);
 
 module.exports = itemsRouter;
