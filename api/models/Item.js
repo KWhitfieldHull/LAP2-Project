@@ -1,6 +1,5 @@
 const db = require("../database/connect_user")
 
-
 class Item {
 
     constructor({ item_id, name, category, user_id, image_url, description  }) {
@@ -26,6 +25,7 @@ class Item {
         if (response.rows.length != 1) {
             throw new Error("Unable to locate item.")
         }
+        
         return new Item(response.rows[0]);
     }
 
@@ -40,29 +40,23 @@ class Item {
     static async create(data) {
         const { image_url, name, description, category, user_id } = data;
         const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
-        
-        //const itemId = response.rows[0].item_id;
-        //const newItem = await Item.getOneById(itemId);
-        //return new Item(newItem)
-
-        return new Item(response.rows);
-
-
-
+        const itemId = response.rows[0].item_id;
+        const newItem = await Item.getOneById(itemId);
+        return new Item(newItem)
     }
 
-    // async update(data) {
+    static async update(data, id) {
+        const { name, user_id, image_url, description, category } = data;
+        const response = await db.query("UPDATE items_table SET name = $1, user_id =$2, image_url =$3, description =$4, category =$5 WHERE item_id = $6 RETURNING *;",
+            [name, user_id, image_url, description, category, id]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to update item")
+        }
+        return new Item(response.rows[0]);
+    }
 
-    //     const response = await db.query("UPDATE item SET votes = $1 WHERE snack_id = $2 RETURNING snack_id, votes;",
-    //         [newVotes, this.id]);
-    //     if (response.rows.length != 1) {
-    //         throw new Error("Unable to update votes.")
-    //     }
-    //     return new Item(response.rows[0]);
-    // }
-
-    async destroy() {
-        const response = await db.query('DELETE FROM items_table WHERE item_id = $1 RETURNING *;', [this.id]);
+    async destroy(id) {
+        const response = await db.query('DELETE FROM items_table WHERE item_id = $1 RETURNING *;', [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to delete item.")
         }

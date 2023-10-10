@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 
 const User = require('../models/user');
-const Token = require("../models/token")
+const Token = require("../models/token");
+
 
 async function register(req, res) {
     try {
@@ -14,9 +15,7 @@ async function register(req, res) {
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
-
 };
-
 async function login(req, res) {
     const data = req.body;
     try {
