@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <script src="./assets/items.js" defer></script>
+</head>
+<body>
+    <h1>Items</h1>
+    <br><br>
+
+    <div class="container" id="posts"></div>
+
+    <br><br><br><br>
+    <form id="itemsForm">
+        <div>
+            <label for="itemFile">Select an Image:</label><br>
+            <input type="file" id="itemFile" accept="image/*" required>
+        </div>
+        <div>
+            <label for="itemName">Name of item:</label><br>
+            <input type="text" id="itemName" name="itemName" required><br>
+
+            <label for="itemDesc">Description of item:</label><br>
+            <input type="text" id="itemDesc" name="itemDesc" required><br>
+
+            <label for="itemCategory">Category of item:</label><br>
+            <input type="text" id="itemCategory" name="itemCategory" required><br>
+
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+
+</body>
+</html>
+

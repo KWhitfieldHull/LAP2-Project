@@ -38,7 +38,7 @@ class Item {
     }
 
     static async create(data) {
-        const { name, user_id, image_url, description, category } = data;
+        const { image_url, name, description, category, user_id } = data;
         const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
         const itemId = response.rows[0].item_id;
         const newItem = await Item.getOneById(itemId);
