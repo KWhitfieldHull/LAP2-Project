@@ -60,15 +60,15 @@ describe('getAll', () => {
 
 
   describe('create', () => {
-    it('resolves with goat on successful db query', async () => {
-      let itemData = { item_id: 1,name: 'g1', category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' }
+    it('resolves with item on successful db query', async () => {
+      let itemData = { name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' }
       jest.spyOn(db, 'query')
         .mockResolvedValueOnce({ rows: [{ ...itemData, item_id: 1 }] });
-
       const result = await Item.create(itemData);
       expect(result).toBeTruthy()
       expect(result).toHaveProperty('item_id')
       expect(result).toHaveProperty('name')
+      
     })
 
     it('should throw an Error on db query error', async () => {
@@ -81,3 +81,52 @@ describe('getAll', () => {
       }
     })
   })
+
+
+  describe('getOneByCategory', () => {
+    it('resolves with items on successful db query', async () => {
+      let testGoat = { item_id: 1, name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' }
+      jest.spyOn(db, 'query')
+        .mockResolvedValueOnce({ rows: [testGoat] })
+
+      const result = await Item.getOneByCategory("c1")
+      expect(result[0]).toBeInstanceOf(Item)
+      expect(result[0].name).toBe('g1')
+      expect(result[0].id).toBe(1)
+    })
+
+    it('should throw an Error on db query error', async () => {
+      jest.spyOn(db, 'query').mockRejectedValue(new Error('There are no items with this category!'))
+
+      try {
+        await Item.getOneByCategory(1)
+      } catch (error) {
+        
+        expect(error).toBeTruthy()
+        expect(error.message).toBe('There are no items with this category!')
+      }
+    })
+  })
+
+  describe('update', () => {
+    it('should throw an error if name is missing', async () => {
+      jest.spyOn(db, 'query').mockRejectedValue(new Error('Parameters Missing'))
+      try {
+        const item = new Item({name: "n1",category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' })
+        console.log("testing purposes remove later");
+        await Item.update({ name: 'puppet' }, item.item_id);
+      } catch (error) {
+        expect(error).toBeTruthy()
+        expect(error.message).toBe('Parameters Missing')
+      }
+    })
+  })
+
+
+
+
+
+
+
+
+

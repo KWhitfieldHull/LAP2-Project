@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
+    "test": "jest --detectOpenHandles --runInBand --verbose --coverage --watchAll",
     "dev": "nodemon -L api/index.js",
     "setup-db1": "node api/database/setup.js",
     "setup-db2": "node api/database/setup_user.js"

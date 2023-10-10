@@ -3,7 +3,7 @@ const db = require("../database/connect_user")
 
 class Item {
 
-    constructor({ item_id, name, category, user_id, image_url, description  }) {
+    constructor({ item_id, name, category, user_id, image_url, description }) {
         this.id = item_id;
         this.name = name;
         this.user_id = user_id;
@@ -26,7 +26,7 @@ class Item {
         if (response.rows.length != 1) {
             throw new Error("Unable to locate item.")
         }
-        
+
         return new Item(response.rows[0]);
     }
 
@@ -40,10 +40,9 @@ class Item {
 
     static async create(data) {
         const { name, user_id, image_url, description, category } = data;
+
         const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
-        const itemId = response.rows[0].item_id;
-        const newItem = await Item.getOneById(itemId);
-        return new Item(newItem)
+        return response.rows[0]
     }
 
     static async update(data, id) {
