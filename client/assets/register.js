@@ -24,3 +24,23 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
         alert(data.error);
     }
 })
+
+const videoContainer = document.getElementById('animation-play-hover');
+videoContainer.addEventListener('mouseover', () => {
+    const video = videoContainer.querySelector('video');
+    video.play()
+})
+videoContainer.addEventListener('mouseout', () => {
+    const video = videoContainer.querySelector('video');
+    video.pause();
+    video.currentTime = 0;
+});
+
+function playVideo(video) {
+    video.play();
+}
+
+function stopVideo(video) {
+    video.pause();
+    video.currentTime = 0;
+}
