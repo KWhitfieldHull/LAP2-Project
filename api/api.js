@@ -7,13 +7,15 @@ const itemsRouter = require('./routers/items');
 const api = express();
 
 api.use(cors());
-api.use(express.json({ limit: '50mb' }));
+api.use(express.json({ limit: '100mb' }));
 
 const bodyParser = require('body-parser');
-api.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+api.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 
 api.use("/users", userRouter);
 api.use("/items", itemsRouter);
 
 module.exports = api;
+
+

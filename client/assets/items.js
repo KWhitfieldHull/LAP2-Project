@@ -7,6 +7,10 @@ function createPostElement (data) {
     const name = document.createElement("h1");
     name.textContent = `Name: ${data["name"]}`;
     post.appendChild(name);
+
+    const image = document.createElement('img');
+    image.src = data["image_url"];
+    post.appendChild(image);
     
     const category = document.createElement("h3");
     category.textContent = `Category: ${data["category"]}`;
@@ -56,32 +60,19 @@ loadDiary();
 
 
 
-/////////CREATE POST
 
-// document.getElementById("itemsForm").addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     const img = document.querySelector('#imageFile');
-//     const name = document.querySelector('#itemName');
-//     const description = document.querySelector('#itemDesc');
-//     const category = document.querySelector('#itemCategory');
-
-//     const form = {img:img.value, name:name.value, description:description.value, category:category.value};
-    
-    
- 
-//   });
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("itemsForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // Get the selected image file
+        
         const imageFile = document.querySelector("#itemFile").files[0];
         const name = document.querySelector('#itemName');
         const description = document.querySelector('#itemDesc');
         const category = document.querySelector('#itemCategory');
 
-        // Read the image file as base64
+     
         if (imageFile) {
             const fileReader = new FileReader();
             fileReader.onload = async () => {
@@ -93,14 +84,59 @@ document.addEventListener("DOMContentLoaded", () => {
                 imageElement.src = srcData;
                 document.body.appendChild(imageElement);
 
+
+
+                const img = new Image();
+                img.src = srcData;
+
+                function resizeImageAndCallback(callback) {
+                img.onload = function () {
+                    const maxWidth = 150; 
+                    const maxHeight = 150;
+                    const quality = 0.3; 
+
+                   
+                    let newWidth = img.width;
+                    let newHeight = img.height;
+                    if (img.width > maxWidth) {
+                    newWidth = maxWidth;
+                    newHeight = (img.height * maxWidth) / img.width;
+                    }
+                    if (newHeight > maxHeight) {
+                    newHeight = maxHeight;
+                    newWidth = (img.width * maxHeight) / img.height;
+                    }
+
+                 
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                  
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+
+                   
+                    ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                    
+                    const resizedBase64 = canvas.toDataURL('image/jpeg', quality);
+
+                    
+                    callback(resizedBase64);
+                };
+                }
+
+                resizeImageAndCallback(async function (resizedBase64) {
+                console.log('Resized and compressed base64:', resizedBase64);
                 const form = {
-                    image_url: srcData,
+                    image_url: resizedBase64,
                     name: name.value,
                     description: description.value,
                     category: category.value,
                     user_id: 1
                 };
 
+                
                 
                 
                 const options = {
@@ -110,14 +146,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     body: JSON.stringify(form)
                 }
-              
+               
                 const result = await fetch("http://localhost:3000/items/newitem", options);
-              
+               
                 if (result.status == 201) {
                     alert("Entry Entered successfully")
                     window.location.reload();
                     diaryForm.reset()
                 }
+                });
+
+                
             };
 
             
