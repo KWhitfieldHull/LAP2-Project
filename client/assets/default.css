@@ -1,7 +1,6 @@
 body {
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('./img/diary.jpg');
     /* margin: 40px auto; */
     /* max-width: 650px; */
     line-height: 1.6;
@@ -76,10 +75,12 @@ fieldset {
 
 .btn-add {
     background-color: #0CB0B3;
+    color: white;
 }
 
 .btn-add:hover {
     background-color: #21e0e3;
+    color: white;
 }
 
 
@@ -99,6 +100,39 @@ fieldset {
 }
 
 .accountCategory:hover {
+    background-color: #139B77;
+    transition: .25s;
+    color: white;
+    border: 0;
+}
+
+.btn-manage {
+    background-color: #127ca9;
+    color: white;
+}
+
+.btn-manage:hover {
+    background-color: #127ca9c9;
+    color: white;
+}
+
+.btn-manage+.btn-manage {
+    margin-left: 1rem;
+}
+
+/* categories page */
+.itemCategories {
+    color: #444;
+    white-space: nowrap;
+}
+
+.itemCategories h3, .itemCategories p {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.itemCategories:hover {
     background-color: #139B77;
     transition: .25s;
     color: white;
