@@ -44,7 +44,8 @@ async function update(req, res) {
     try {
         const id = parseInt(req.params.id);
         const data = req.body;
-        const itemToUpdate = await Item.getOneById(id)
+       const itemToUpdate = await Item.getOneById(id)
+       
         req.body.name ||= itemToUpdate.name
         req.body.user_id ||= itemToUpdate.user_id
         req.body.image_url ||= itemToUpdate.image_url
