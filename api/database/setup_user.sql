@@ -23,11 +23,17 @@ CREATE TABLE items_table (
     name VARCHAR (100) NOT NULL,
     category VARCHAR(200) NULL,
     user_id INT NOT NULL, 
-    image_url VARCHAR(100),
+    image_url VARCHAR(65000),
     description VARCHAR (500) NOT NULL,
     PRIMARY KEY (item_id),
     FOREIGN KEY (user_id) REFERENCES users_table("user_id")
 );
+
+
+INSERT INTO users_table (username, password, address, admin, points) VALUES 
+('testname', 'notencryptedyet', '123 Real Street', FALSE, 12),
+('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);
+
 
 INSERT INTO items_table (name, category, user_id, image_url, description) VALUES 
     ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale'),
@@ -35,6 +41,3 @@ INSERT INTO items_table (name, category, user_id, image_url, description) VALUES
     ('Laptop', 'Electronics', 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
     ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale');
 
-INSERT INTO users_table (username, password, address, admin, points) VALUES 
-('testname', 'notencryptedyet', '123 Real Street', FALSE, 12),
-('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);
