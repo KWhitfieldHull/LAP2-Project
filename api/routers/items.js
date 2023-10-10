@@ -9,5 +9,7 @@ itemsRouter.get('/:id', itemsController.show);
 itemsRouter.post('/newitem', itemsController.create);
 itemsRouter.patch('/:id', itemsController.update);
 itemsRouter.delete('/:id', itemsController.destroy);
+itemsRouter.post('/upload', itemsController.upload);
+itemsRouter.get('/pics', itemsController.getallimages);
 
 module.exports = itemsRouter;

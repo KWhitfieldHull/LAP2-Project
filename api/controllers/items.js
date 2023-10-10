@@ -64,7 +64,25 @@ async function destroy(req, res) {
         res.status(404).json({ "error": err.message })
     }
 }
+async function upload(req,res){
+    try{
+        const name =req.files.pic
+        const data = req.files.data
+        const result = await Item.uploadImage(name, data)
+        res.status(201).json(result)
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
+}
+async function getallimages(req,res){
+    try{
+        const result = await Item.getallimages()
+        res.status(201).json(result)
+    }catch(error){
+        res.status(404).json({error: error.message})
+    }
+}
 
 module.exports = {
-    index, show, create, destroy, update, title
+    index, show, create, destroy, update, title, upload, getallimages
 }

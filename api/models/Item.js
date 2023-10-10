@@ -61,6 +61,20 @@ class Item {
         }
         return new Item(response.rows[0]);
     }
+    static async uploadImage(name, data){
+        const response = await db.query("INSERT into images_table(name, img) VALUES ($1, $2)", [name, data])
+        if (response.rows.length !=1){
+            throw new Error("Check response, something went wrong")
+        }
+        return response.rows[0]
+    }
+    static async getallimages(){
+        const response = db.query("SELECT * FROM images_table")
+        if (response.rows.length !=1){
+            throw new Error("Check response, something went wrong")
+        }
+        return response.rows[0]
+    }
 }
 
 module.exports = Item;

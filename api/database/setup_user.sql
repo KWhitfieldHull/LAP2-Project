@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS items_table;
 DROP TABLE IF EXISTS token_table;
 DROP TABLE IF EXISTS users_table;
+DROP TABLE IF EXISTS images_table;
 
 CREATE TABLE users_table (
     user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -27,6 +28,13 @@ CREATE TABLE items_table (
     description VARCHAR (500) NOT NULL,
     PRIMARY KEY (item_id),
     FOREIGN KEY (user_id) REFERENCES users_table("user_id")
+);
+
+CREATE TABLE images_table(
+    img_id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    img VARCHAR(1999),
+    PRIMARY KEY(img_id)
 );
 
 INSERT INTO items_table (name, category, user_id, image_url, description) VALUES 
