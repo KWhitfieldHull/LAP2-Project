@@ -106,12 +106,13 @@ describe("items controller", () => {
 
             const mockRequest = () => {
                 return {
-                    body: { testItems }
+                    body: { testItems },
+                    params: { id: 1 }
                 }
             }
             mockReq = mockRequest()
+            
             await itemsController.update(mockReq, mockRes)
-
             expect(Item.update).toHaveBeenCalledTimes(1)
             expect(mockSend).toHaveBeenCalledWith({ data: testItems })
         })
