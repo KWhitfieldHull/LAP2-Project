@@ -1,5 +1,7 @@
 //////////////CREATE ELEMENT
 
+
+
 function createPostElement (data) {
     const post = document.createElement("div");
     post.className = "post";
@@ -36,12 +38,15 @@ async function loadDiary () {
     try {
       const response = await fetch("http://localhost:3000/items");
       const posts = await response.json();
+      console.log(posts);
+      const test = posts.data;
+     
       
       if (response.status == 200) {
         
         const container = document.getElementById("posts");
   
-        posts.forEach(p => {
+        test.forEach(p => {
           const elem = createPostElement(p);
           container.appendChild(elem);
         });
