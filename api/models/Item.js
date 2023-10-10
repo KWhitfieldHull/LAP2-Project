@@ -1,6 +1,5 @@
 const db = require("../database/connect_user")
 
-
 class Item {
 
     constructor({ item_id, name, category, user_id, image_url, description  }) {
