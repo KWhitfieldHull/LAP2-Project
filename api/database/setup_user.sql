@@ -1,7 +1,13 @@
 DROP TABLE IF EXISTS items_table;
 DROP TABLE IF EXISTS token_table;
 DROP TABLE IF EXISTS users_table;
+DROP TABLE IF EXISTS categories_table;
 
+CREATE TABLE categories_table (
+    category_id INT GENERATED ALWAYS AS IDENTITY,
+    category VARCHAR (100) NOT NULL,
+    PRIMARY KEY (category_id)
+);
 CREATE TABLE users_table (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(30) UNIQUE NOT NULL,
@@ -18,16 +24,24 @@ CREATE TABLE token_table (
     PRIMARY KEY (token_id),
     FOREIGN KEY (user_id) REFERENCES users_table("user_id")
 );
+
 CREATE TABLE items_table (
     item_id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR (100) NOT NULL,
-    category VARCHAR(200) NULL,
+    category_id INT NOT NULL,
     user_id INT NOT NULL, 
     image_url VARCHAR(65000),
     description VARCHAR (500) NOT NULL,
     PRIMARY KEY (item_id),
-    FOREIGN KEY (user_id) REFERENCES users_table("user_id")
+    FOREIGN KEY (user_id) REFERENCES users_table("user_id"),
+    FOREIGN KEY (category_id) REFERENCES categories_table("category_id")
 );
+
+
+INSERT INTO categories_table (category) VALUES
+    ('Glass'),
+    ('Metal'),
+    ('Paper');
 
 
 INSERT INTO users_table (username, password, address, admin, points) VALUES 
@@ -35,9 +49,9 @@ INSERT INTO users_table (username, password, address, admin, points) VALUES
 ('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);
 
 
-INSERT INTO items_table (name, category, user_id, image_url, description) VALUES 
-    ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale'),
-    ('Football', 'Sports', 1, 'google.com/images', 'a very cool football for sale'),
-    ('Laptop', 'Electronics', 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
-    ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale');
+INSERT INTO items_table (name, category_id, user_id, image_url, description) VALUES 
+    ('Bottle', 1, 1, 'google.com/images', 'a very cool camera for sale'),
+    ('Glass item', 1, 1, 'google.com/images', 'a very cool football for sale'),
+    ('Metal item', 2, 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
+    ('Paper item', 3, 1, 'google.com/images', 'a very cool camera for sale');
 

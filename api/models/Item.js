@@ -2,17 +2,18 @@ const db = require("../database/connect_user")
 
 class Item {
 
-    constructor({ item_id, name, category, user_id, image_url, description }) {
-        this.id = item_id;
-        this.name = name;
-        this.user_id = user_id;
-        this.image_url = image_url;
-        this.category = category;
-        this.description = description;
+    constructor(data) {
+        this.id = data.item_id;
+        this.name = data.name;
+        this.category_id = data.category_id;
+        this.category = data.category;
+        this.user_id = data.user_id;
+        this.image_url = data.image_url;
+        this.description = data.description;
     }
 
     static async getAll() {
-        const response = await db.query("SELECT * FROM items_table ORDER BY name;");
+        const response = await db.query("SELECT i.item_id, i.name, c.category, i.user_id, i.image_url, i.description FROM items_table AS i JOIN categories_table AS c ON c.category_id = i.category_id ORDER BY i.item_id");
         if (response.rows.length === 0) {
             throw new Error("No items available.")
         }
@@ -30,7 +31,7 @@ class Item {
     }
 
     static async getOneByCategory(category) {
-        const response = await db.query("SELECT * FROM items_table WHERE category = $1;", [category]);
+        const response = await db.query("SELECT * FROM items_table WHERE category_id = $1;", [category]);
         if (response.rows.length === 0) {
             throw new Error("No items available.")
         }
@@ -40,7 +41,7 @@ class Item {
     static async create(data) {
         const { name, user_id, image_url, description, category } = data;
 
-        const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
+        const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category_id) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
         return response.rows[0]
     }
 
