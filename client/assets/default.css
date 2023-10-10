@@ -14,6 +14,10 @@ body {
 
 }
 
+.shadow-sm {
+    z-index: 1;
+}
+
 a.nav-link.active {
     border-bottom: 1px solid black;
 }
@@ -22,6 +26,7 @@ a.nav-link.active {
 h1, h2, h3 {
     line-height: 1.2
 }
+
 
 fieldset {
     border: none;
@@ -75,4 +80,27 @@ fieldset {
 
 .btn-add:hover {
     background-color: #21e0e3;
+}
+
+
+/* Account page */
+.accountCategory {
+    color: #444;
+    white-space: nowrap;
+}
+
+.accountCategory h3, .accountCategory p {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#mainBlock a {
+    text-decoration: none;
+}
+
+.accountCategory:hover {
+    background-color: #139B77;
+    transition: .25s;
+    color: white;
+    border: 0;
 }
