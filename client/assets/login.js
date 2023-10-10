@@ -13,9 +13,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         })
     }
 
-    
+
     const response = await fetch("http://localhost:3000/users/login", options);
-    
+
     const data = await response.json();
     if (response.status == 200) {
         localStorage.setItem("token", data.token)
@@ -24,3 +24,25 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         alert(data.error);
     }
 })
+
+
+
+const videoContainer = document.getElementById('animation-play-hover');
+videoContainer.addEventListener('mouseover', () => {
+    const video = videoContainer.querySelector('video');
+    video.play()
+})
+videoContainer.addEventListener('mouseout', () => {
+    const video = videoContainer.querySelector('video');
+    video.pause();
+    video.currentTime = 0;
+});
+
+function playVideo(video) {
+    video.play();
+}
+
+function stopVideo(video) {
+    video.pause();
+    video.currentTime = 0;
+}
