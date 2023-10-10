@@ -66,8 +66,9 @@ async function destroy(req, res) {
 }
 async function upload(req,res){
     try{
-        const name =req.files.pic
-        const data = req.files.data
+        
+        const name =req.files.pic.name
+        const data = req.files.pic.data
         const result = await Item.uploadImage(name, data)
         res.status(201).json(result)
     }catch(error){

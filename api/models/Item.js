@@ -63,6 +63,7 @@ class Item {
     }
     static async uploadImage(name, data){
         const response = await db.query("INSERT into images_table(name, img) VALUES ($1, $2)", [name, data])
+        console.log(response);
         if (response.rows.length !=1){
             throw new Error("Check response, something went wrong")
         }

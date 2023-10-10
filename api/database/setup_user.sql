@@ -32,10 +32,13 @@ CREATE TABLE items_table (
 
 CREATE TABLE images_table(
     img_id INT GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255),
-    img VARCHAR(1999),
+    name bytea(65000),
+    img bytea,
     PRIMARY KEY(img_id)
 );
+INSERT INTO users_table (username, password, address, admin, points) VALUES 
+('testname', 'notencryptedyet', '123 Real Street', FALSE, 12),
+('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);
 
 INSERT INTO items_table (name, category, user_id, image_url, description) VALUES 
     ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale'),
@@ -43,6 +46,3 @@ INSERT INTO items_table (name, category, user_id, image_url, description) VALUES
     ('Laptop', 'Electronics', 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
     ('Camera', 'Electronics', 1, 'google.com/images', 'a very cool camera for sale');
 
-INSERT INTO users_table (username, password, address, admin, points) VALUES 
-('testname', 'notencryptedyet', '123 Real Street', FALSE, 12),
-('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);

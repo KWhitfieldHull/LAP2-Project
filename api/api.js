@@ -13,7 +13,9 @@ api.use(cors());
 api.use(express.json());
 api.use(fileUpload({
     defCharset: 'utf16',
-    defParamCharset: 'utf16'
+    defParamCharset: 'utf16',
+    debug: true,
+    uriDecodeFileNames: true
 }));
 api.use(bodyParser.urlencoded({ extended: false }))
 
