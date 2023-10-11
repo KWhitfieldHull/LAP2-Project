@@ -61,6 +61,10 @@ async function redeem(req, res){
             const newPoints = currentPoints - pointsToTake
              //update points
             const updatedPoints = await Reward.updatePoints(newPoints, id)
+            //send unique voucher
+            const newVoucher = makeVoucher(20)
+            console.log(newVoucher)
+            res.send(newVoucher);
             //return success
             res.status(200).json(updatedPoints)
         }else{
@@ -70,5 +74,17 @@ async function redeem(req, res){
     }catch(error){
         res.status(404).json({error: error.message})
     }
+}
+// create random voucher
+function makeVoucher(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }
 module.exports = {showAllPoints, showPointsById, gainPoint, redeem, resetPointsById}
