@@ -8,7 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getAllItems = async () => {
     try {
-      const response = await fetch("http://localhost:3000/items");
+      const options = {
+        headers: {
+            Authorisation: localStorage.getItem("token")
+        }
+    }
+      const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
       items.forEach((item) => {
@@ -17,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   };
   getAllItems()

@@ -3,7 +3,6 @@ const Token = require("../models/token")
 const authenticator = async (req, res, next) => {
     try {
         const userToken = req.headers.authorisation
-        console.log(localStorage.getItem("token"))
         if (userToken == "null") {
             throw new Error("No User")
             window.location.assign("login.html")
