@@ -36,9 +36,14 @@ function createPostElement (data) {
 
 async function loadDiary () {
     try {
+        const options = {
+            headers: {
+                Authorisation: localStorage.getItem("token")
+            }
+        }
+        console.log(options.headers.Authorisation)
       const response = await fetch("http://localhost:3000/items");
       const posts = await response.json();
-      console.log(posts);
       const test = posts.data;
      
       
@@ -54,7 +59,7 @@ async function loadDiary () {
         //window.location.assign("./index.html");
       }
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
 }
 

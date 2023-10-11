@@ -14,6 +14,15 @@ class Category {
     }
     return response.rows.map(g => new Category(g));
   }
+
+  static async getOneById(id) {
+    const response = await db.query("SELECT * FROM categories_table WHERE category_id = $1;", [id]);
+    if (response.rows.length != 1) {
+      throw new Error("Unable to locate item.")
+    }
+
+    return new Category(response.rows[0]);
+  }
 }
 
 module.exports = Category;
