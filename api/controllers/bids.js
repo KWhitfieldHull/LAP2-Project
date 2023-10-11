@@ -10,7 +10,7 @@ async function index(req, res) {
 }
 async function showItemBid(req, res) {
     try {
-        const item_id = parseInt(req.params.id);
+        const item_id = parseInt(req.params.itemid);
         const highestBidOBJ = await Bid.getBidByItemId(item_id);
         res.status(200).send({data: highestBidOBJ});
     } catch (err) {
@@ -40,12 +40,14 @@ async function bidHandler(req,res){
     let itemCheck = await Bid.getBidByItemId(item_id)
     //item not in bids_table then add:
     if (itemCheck ===-1){
+        //post
         newBid = Bid.createBid(user_id, item_id, proposed_bid)
         res.status(200).send({newBid})
     }else{
         //check bid is higher than currentbid
         currentBid = await (Bid.getBidByItemId(item_id)).highest_bid
         if (proposed_bid>currentBid){
+            //patch
             updatedBid = await Bid.updateBid(user_id, item_id, proposed_bid)
             res.status(200).send(updatedBid)
         }
