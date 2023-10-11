@@ -20,18 +20,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  const getBidById = async (id) => {
+    try {
+      const options = {
+        headers: {
+          Authorisation: localStorage.getItem("token")
+        },
+        mode: 'cors'
+      }
+      const response = await fetch(`http://localhost:3000/bids/${id}`, options);
+      const obj = await response.json();
+      const bids = await obj.data;
+      return bids['highest_bid']
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const getAllItems = async () => {
     try {
       const options = {
         headers: {
-            Authorisation: localStorage.getItem("token")
+          Authorisation: localStorage.getItem("token")
         }
-    }
+      }
       const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
-      items.forEach((item) => {
-        const e = addItem(item)
+      items.forEach(async (item) => {
+        const e = await addItem(item)
         itemsList.appendChild(e)
       })
     } catch (err) {
@@ -71,14 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 
-
   const getAllCategories = async () => {
     try {
       const options = {
         headers: {
-            Authorisation: localStorage.getItem("token")
+          Authorisation: localStorage.getItem("token")
         }
-    }
+      }
       const response = await fetch("http://localhost:3000/categories", options);
       const obj = await response.json();
       const categories = await obj.data;
@@ -97,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const options = {
         headers: {
-            Authorisation: localStorage.getItem("token")
+          Authorisation: localStorage.getItem("token")
         }
-    }
+      }
       const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
@@ -114,13 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.assign("login.html")
     }
   }
+
+
   // add item
-  const addItem = (item) => {
-
-
-
+  const addItem = async (item) => {
     const content = document.createElement('div')
     let id = item['id']
+    let bid = await getBidById(id)
     content.id = `item-${id}`
     content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom">
@@ -135,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div class="input-group mb-3">
-                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: £50</label>
+                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
                             
                               <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
                               <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
@@ -146,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 `
     return content;
-  
+
   }
 
   //add category
