@@ -5,7 +5,7 @@ const authenticator = async (req, res, next) => {
         const userToken = req.headers.authorisation
         if (userToken == "null") {
             throw new Error("No User")
-            window.location.assign("login.html")
+            
         } else {
             const validToken = await Token.getOneByToken(userToken)
             return next()
