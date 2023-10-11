@@ -4,11 +4,10 @@ const bidsController = require('../controllers/bids');
 
 const bidsRouter = Router();
 
-bidsRouter.get('/', authenticator, bidsController.index);
-bidsRouter.get('/:itemid', authenticator, bidsController.showItemBid);
-bidsRouter.get('/:userid', authenticator, bidsController.showUserBid);
-// bidsRouter.get('/bidplaced', authenticator, bidsController.bidHandler);
-bidsRouter.patch('/bidsupdated', authenticator, bidsController.bidHandler);
+bidsRouter.get('/', bidsController.index);
+bidsRouter.get('/:itemid', bidsController.showItemBid);
+bidsRouter.get('/user/:userid', bidsController.showUserBid);
+bidsRouter.patch('/bidsupdated', bidsController.bidHandler);
 bidsRouter.post('/newbid', authenticator, bidsController.bidHandler);
 // bidsRouter.patch('/:id', authenticator, bidsController.bidHandler);
 bidsRouter.delete('/:itemid', authenticator, bidsController.deleteBid);

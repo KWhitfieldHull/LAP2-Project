@@ -20,14 +20,15 @@ class Bid{
         if (response.rows.length != 1) {
             throw new Error("Unable to locate bid.")
         }
-        return new Item(response.rows[0]);
+        return new Bid(response.rows[0]);
     }
     static async getBidByItemId(item_id) {
+        console.log("Second log")
         const response = await db.query("SELECT * FROM bids_table WHERE item_id = $1;", [item_id]);
         if (response.rows.length === 0) {
             return -1
         }
-        return new Item(response.rows[0]);
+        return new Bid(response.rows[0]);
     }
     static async getBidByUserId(user_id) {
         const response = await db.query("SELECT * FROM bids_table WHERE user_id = $1;", [user_id]);
@@ -45,14 +46,14 @@ class Bid{
         if (response.rows.length != 1) {
             throw new Error("Unable to update item")
         }
-        return new Item(response.rows[0]);   
+        return new Bid(response.rows[0]);   
     }
     async deleteBid(item_id){
         const response = await db.query("DELETE FROM bids_table WHERE item_id = $1 RETURNING *", [item_id])
         if (response.rows.length != 1) {
             throw new Error("Unable to delete item.")
         }
-        return new Item(response.rows[0]);
+        return new Bid(response.rows[0]);
 }
     
 

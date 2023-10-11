@@ -10,6 +10,7 @@ async function index(req, res) {
 }
 async function showItemBid(req, res) {
     try {
+        console.log('Here')
         const item_id = parseInt(req.params.itemid);
         const highestBidOBJ = await Bid.getBidByItemId(item_id);
         res.status(200).send({data: highestBidOBJ});
