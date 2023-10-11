@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const itemsList = document.getElementById('itemsList');
   const categoriesList = document.getElementById('categoriesList');
   const resetItemsButton = document.getElementById('resetItemsButton');
+  const logoutButton = document.getElementById("log-out")
 
   const getAllItems = async () => {
     try {
@@ -119,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
 `
     return content;
   }
+
+  logoutButton.addEventListener('click', () => {
+    localStorage.removeItem("token")
+  })
+
 
   const listenItem = (id) => {
     let buttonId = `itemAddButton-${id}`
