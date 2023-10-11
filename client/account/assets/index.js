@@ -1,6 +1,11 @@
 const mainBlock = document.getElementById('mainBlock');
 
 const createAccountPage = (heading = "heading", text = "description", link = "#") => {
+  
+  
+  
+  
+  
   const overallBlock = document.createElement('div');
   const manageBlock = document.createElement('div');
   const manageLink = document.createElement('a');

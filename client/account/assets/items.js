@@ -38,8 +38,11 @@ addNewItemButton.addEventListener('click', async e => {
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
+        Authorisation : localStorage.getItem("token")
       }
     }
+    
+  
     const response = await fetch("http://localhost:3000/items/newitem", options);
     const result = await response.json();
     if (!itemName || !itemCategory || !itemDescription) {
@@ -50,5 +53,6 @@ addNewItemButton.addEventListener('click', async e => {
     }
   } catch (err) {
     console.error(err)
+    window.location.assign("login.html")
   }
 })

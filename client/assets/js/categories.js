@@ -22,7 +22,12 @@ const createAccountPage = (heading, link = "#") => {
 // createAccountPage('Metal', './assets/metal-bg.jpg', './manage.html')
 const getAllCategories = async () => {
   try {
-    const response = await fetch("http://localhost:3000/categories");
+    const options = {
+      headers: {
+          Authorisation: localStorage.getItem("token")
+      }
+  }
+    const response = await fetch("http://localhost:3000/categories", options);
     const obj = await response.json();
     const categories = await obj.data;
     console.log(categories)
@@ -31,6 +36,7 @@ const getAllCategories = async () => {
     })
   } catch (err) {
     console.error(err)
+    window.location.assign("login.html")
   }
 };
 getAllCategories()
