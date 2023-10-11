@@ -36,13 +36,11 @@ class Bid{
         }
         return response.rows.map(b => new Bid(b));
     }
-    static async createBid(data){
-        const {user_id, item_id, highest_bid} = data
+    static async createBid(user_id, item_id, highest_bid){
         const response = await db.query('INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1, $2, $3) RETURNING *;', [user_id,item_id, highest_bid]);
         return response.rows[0]
     }
-    static async updateBid(data){
-        const {user_id, item_id, highest_bid} = data
+    static async updateBid(user_id, item_id, highest_bid){
         const response = await db.query("UPDATE bids_table SET user_id =$1, highest_bid=$2 WHERE item_id = $3 RETURNING *;", [user_id, highest_bid, item_id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to update item")
@@ -50,8 +48,13 @@ class Bid{
         return new Item(response.rows[0]);   
     }
     async deleteBid(item_id){
-        const response = await db.query("DELETE FROM bids_table WHERE item_id = $1", [item_id])
-    }
+        const response = await db.query("DELETE FROM bids_table WHERE item_id = $1 RETURNING *", [item_id])
+        if (response.rows.length != 1) {
+            throw new Error("Unable to delete item.")
+        }
+        return new Item(response.rows[0]);
+}
+    
 
 }
 module.exports = Bid;
