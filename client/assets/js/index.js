@@ -19,6 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
     logInButtons.appendChild(logOut)
   }
 
+  const updateBid = async (data) =>{
+    try{
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorisation: localStorage.getItem("token")
+        }, 
+        mode: 'cors',
+        body: JSON.stringify(data)
+      }
+      console.log(options.body)
+      const response = await fetch('http://localhost:3000/bids/bidsupdated', options)
+      const obj = await response.json();
+      console.log(obj)
+    }catch(error){
+      console.error(error)
+    }
+  }
 
   const getBidById = async (id) => {
     try {
@@ -208,9 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
             //Sets the ID of the item you clicked Add on
             const bidID = `itemAddBid-${id}`
             //gets the value of the bid
-            const bidValue = document.getElementById(bidID)
-
-           //TEMP COMMENTED RESTORE LATER THIS IS JUST TESTING
+            const bidValue = document.getElementById(bidID).value
+            data = {item_id:id,proposed_bid: bidValue, user_id:3}
+            updateBid(data)
+            window.location.reload()
+            //TEMP COMMENTED RESTORE LATER THIS IS JUST TESTING
             //deleteItem(listenItem(id).item)
           })
         }
