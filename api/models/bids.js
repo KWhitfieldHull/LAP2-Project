@@ -25,7 +25,7 @@ class Bid {
     static async getBidByItemId(item_id) {
         const response = await db.query("SELECT * FROM bids_table WHERE item_id = $1;", [item_id]);
         if (response.rows.length === 0) {
-            return -1
+            throw new Error("no item was found, response 0 rows")
         }
         return new Bid(response.rows[0]);
     }
@@ -45,7 +45,7 @@ class Bid {
         if (response.rows.length != 1) {
             throw new Error("Unable to update item")
         }
-        return new Bid(response.rows[0]);
+        return new Bid(response.rows[0]);   
     }
     async deleteBid(item_id) {
         const response = await db.query("DELETE FROM bids_table WHERE item_id = $1 RETURNING *", [item_id])
@@ -53,8 +53,8 @@ class Bid {
             throw new Error("Unable to delete item.")
         }
         return new Bid(response.rows[0]);
-    }
-
+}
+    
 
 }
 module.exports = Bid;

@@ -6,7 +6,7 @@ const itemsRouter = Router();
 
 itemsRouter.get('/', authenticator, itemsController.index);
 itemsRouter.get('/:id', authenticator, itemsController.show);
-itemsRouter.post('/newitem', authenticator, itemsController.create);
+itemsRouter.post('/newitem',authenticator, itemsController.create);
 itemsRouter.patch('/:id', authenticator, itemsController.update);
 itemsRouter.delete('/:id', authenticator, itemsController.destroy);
 
