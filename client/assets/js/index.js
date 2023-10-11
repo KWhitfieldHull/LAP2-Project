@@ -99,7 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
-                            <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add To My List</button>
+                            <div class="input-group mb-3">
+                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: £50</label>
+                            
+                              <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
+                              <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
+                            </div>
                         </div>
                         </div>
                     </div>
