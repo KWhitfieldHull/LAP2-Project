@@ -47,9 +47,14 @@ CREATE TABLE bids_table(
 );
 
 INSERT INTO categories_table (category) VALUES
-    ('Glass'),
+    ('Paper'),
     ('Metal'),
-    ('Paper');
+    ('Electronic'),
+    ('Wood'),
+    ('Glass'),
+    ('Textile'),
+    ('Bricks'),
+    ('Plastic');
 
 
 INSERT INTO users_table (username, password, address, admin, points) VALUES 
