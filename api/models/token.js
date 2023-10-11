@@ -4,10 +4,15 @@ const db = require("../database/connect_user");
 
 class Token {
 
-    constructor({ token_id, user_id, token }) {
+    constructor({ token_id, user_id, token, username, address, admin, points }) {
         this.token_id = token_id;
         this.user_id = user_id;
         this.token = token;
+        this.username = username;
+        this.address = address;
+        this.admin = admin;
+        this.points = points;
+
     }
 
     static async create(user_id) {
@@ -30,6 +35,17 @@ class Token {
     static async getOneByToken(token) {
         const response = await db.query("SELECT * FROM token_table WHERE token = $1", [token]);
         if (response.rows.length != 1) {
+            throw new Error("Unable to locate token.");
+        } else {
+            return new Token(response.rows[0]);
+        }
+    }
+
+
+    static async getUserByToken(data) {
+        const { token } = data;
+        const response = await db.query("SELECT users_table.* FROM users_table INNER JOIN token_table ON users_table.user_id = token_table.user_id WHERE token_table.token = $1;", [token]);
+        if (response.rows.length == 0) {
             throw new Error("Unable to locate token.");
         } else {
             return new Token(response.rows[0]);

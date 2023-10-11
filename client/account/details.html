@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/default.css">
     <script src="../assets/js/bootstrap.min.js" defer></script>
-    <script src="./assets/js/details.js" defer></script>
+    <script src="./assets/details.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,11 +49,10 @@
   </header>
   <main class="my-md-5 flex-grow-1 border-end">
       <div class="container h-100 col-4">
-        <p class="d-flex justify-content-between mb-0"><b>Username/Email:</b> <span id="userName">#userName</span></p><hr>
-        <p class="d-flex justify-content-between mb-0"><b>Password:</b> <span id="userPassword">#userPassword</span></p><hr>
-        <p class="d-flex justify-content-between mb-0"><b>Address:</b> <span id="userAddress">#userAddress</span></p><hr>
-        <p class="d-flex justify-content-between mb-0"><b>Points:</b> <span id="userPoints">#userPoints</span></p><hr>
-        <p class="d-flex justify-content-between"><b>Status:</b> <span id="userStatus">#userStatus (Admin or User)</span></p>
+        <p class="d-flex justify-content-between mb-0"><b>Username/Email:</b> <span id="userName"></span></p><hr>
+        <p class="d-flex justify-content-between mb-0"><b>Address:</b> <span id="userAddress"></span></p><hr>
+        <p class="d-flex justify-content-between mb-0"><b>Points:</b> <span id="userPoints"></span></p><hr>
+        <p class="d-flex justify-content-between"><b>Status:</b> <span id="userStatus"></span></p>
         <div class="d-grid gap-2 col-6 mx-auto"><a class="btn btn-manage" id="editUserDetailsButton" data-bs-toggle="modal" data-bs-target="#editUserDetailsModal">Change Details</a></div>
     </div>
   </main>
@@ -74,11 +73,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Password:</label>
-                        <input class="form-control" type="password" id="changePassword" name="password" placeholder="#changePassword">
+                        <input class="form-control" type="password" id="changePassword" name="password" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password2">Confirm Password:</label>
-                        <input class="form-control" type="password" id="changePassword2" name="password2" placeholder="#changePassword2">
+                        <input class="form-control" type="password" id="changePassword2" name="password2" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="address">Address:</label>
@@ -88,7 +87,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-manage">Save changes</button>
+        <button type="button" class="btn btn-manage" id="editDetailsButton">Save changes</button>
       </div>
     </div>
   </div>
