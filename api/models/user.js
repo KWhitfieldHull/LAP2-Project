@@ -1,4 +1,5 @@
 const db = require('../database/connect_user');
+const bcrypt = require('bcrypt');
 
 class User {
 
@@ -47,11 +48,13 @@ class User {
         } 
         if (address == '') {
             address = this.address;
-            
-            
         }
+
+        const saltRounds = 10;
+        const hash = await bcrypt.hash(password, saltRounds);
+
         const response = await db.query("UPDATE users_table SET username = $1, password = $2, address = $3 WHERE user_id = $4 RETURNING *;",
-            [ username, password, address, this.id ]);
+            [ username, hash, address, this.id ]);
 
 
         
