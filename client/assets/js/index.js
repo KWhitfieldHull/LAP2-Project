@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let id = item['id']
     let bid = await getBidById(id)
     content.id = `item-${id}`
+    //itemAddBid-${item['id']}
     content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom">
                     <div class="row g-0">
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="item${id}">
                             <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
                             
                               <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
@@ -204,7 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
           let id = Number(itemsList.childNodes[i].id.slice(-1))
           const item = listenItem(id).button
           item.addEventListener('click', () => {
-            deleteItem(listenItem(id).item)
+            //Sets the ID of the item you clicked Add on
+            const bidID = `itemAddBid-${id}`
+            //gets the value of the bid
+            const bidValue = document.getElementById(bidID)
+
+           //TEMP COMMENTED RESTORE LATER THIS IS JUST TESTING
+            //deleteItem(listenItem(id).item)
           })
         }
       }
