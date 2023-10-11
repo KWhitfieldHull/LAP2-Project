@@ -2,11 +2,12 @@ const db = require('../database/connect_user');
 
 class User {
 
-    constructor({ user_id, username, password, is_admin }) {
+    constructor({ user_id, username, password, is_admin, address }) {
         this.id = user_id;
         this.username = username;
         this.password = password;
         this.isAdmin = is_admin;
+        this.address = address;
     }
 
     static async getOneById(id) {
@@ -33,6 +34,34 @@ class User {
         const newUser = await User.getOneById(newId);
         return newUser;
     }
+
+
+    async update(data) {
+        let { username, password, address } = data;
+ 
+        if (username == '') {
+            username = this.username;
+        }
+        if (password == '') {
+            password = this.password;
+        } 
+        if (address == '') {
+            address = this.address;
+            
+            
+        }
+        const response = await db.query("UPDATE users_table SET username = $1, password = $2, address = $3 WHERE user_id = $4 RETURNING *;",
+            [ username, password, address, this.id ]);
+
+
+        
+        if (response.rows.length != 1) {
+            throw new Error("Unable to update User.")
+        }
+        return new User(response.rows[0]);
+    }
+
+    
 }
 
 module.exports = User;

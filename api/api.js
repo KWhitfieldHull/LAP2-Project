@@ -5,8 +5,8 @@ const userRouter = require('./routers/user');
 const itemsRouter = require('./routers/items');
 const recycleRouter = require('./routers/recycle');
 const categoryRouter = require('./routers/category');
+const bidsRouter = require('./routers/bids');
 //const pointRouter = require('./routers/point');
-const bidsRouter = require('./routers/bids')
 
 
 const api = express();
