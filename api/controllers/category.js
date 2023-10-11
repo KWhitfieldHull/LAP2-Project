@@ -13,8 +13,18 @@ async function index(req, res) {
 async function show(req, res) {
   try {
     const id = parseInt(req.params.id);
-    const items = await Category.getOneById(id);
-    res.status(200).send({ data: items });
+    const category = await Category.getOneById(id);
+    res.status(200).send({ data: category });
+  } catch (err) {
+    res.status(404).send({ "error": err.message })
+  }
+}
+
+async function getByName(req, res) {
+  try {
+    const name = req.params.category;
+    const category = await Category.getOneByName(name);
+    res.status(200).send({ data: category });
   } catch (err) {
     res.status(404).send({ "error": err.message })
   }
@@ -24,5 +34,5 @@ async function show(req, res) {
 
 
 module.exports = {
-  index, show
+  index, show, getByName
 }

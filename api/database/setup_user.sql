@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS items_table;
+DROP TABLE IF EXISTS bids_table;
+DROP TABLE IF EXISTS items_table CASCADE; 
 DROP TABLE IF EXISTS token_table;
 DROP TABLE IF EXISTS users_table;
 DROP TABLE IF EXISTS categories_table;
@@ -36,12 +37,25 @@ CREATE TABLE items_table (
     FOREIGN KEY (user_id) REFERENCES users_table("user_id"),
     FOREIGN KEY (category_id) REFERENCES categories_table("category_id")
 );
-
+CREATE TABLE bids_table(
+    bid_id INT GENERATED ALWAYS AS IDENTITY, 
+    user_id INT NOT NULL, 
+    item_id INT UNIQUE NOT NULL,
+    highest_bid INT DEFAULT 0,
+    PRIMARY KEY(bid_id), 
+    FOREIGN KEY (item_id) REFERENCES items_table("item_id"), 
+    FOREIGN KEY (user_id) REFERENCES users_table("user_id")
+);
 
 INSERT INTO categories_table (category) VALUES
-    ('Glass'),
+    ('Paper'),
     ('Metal'),
-    ('Paper');
+    ('Electronic'),
+    ('Wood'),
+    ('Glass'),
+    ('Textile'),
+    ('Bricks'),
+    ('Plastic');
 
 
 INSERT INTO users_table (username, password, address, admin, points) VALUES 
@@ -54,4 +68,11 @@ INSERT INTO items_table (name, category_id, user_id, image_url, description) VAL
     ('Glass item', 1, 1, 'google.com/images', 'a very cool football for sale'),
     ('Metal item', 2, 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
     ('Paper item', 3, 1, 'google.com/images', 'a very cool camera for sale');
+
+INSERT INTO bids_table(user_id, item_id, highest_bid) VALUES
+(1, 1, 500), 
+(2,2,30),
+(1, 3, 444), 
+(2,4,15);
+
 

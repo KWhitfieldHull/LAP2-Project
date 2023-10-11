@@ -18,7 +18,16 @@ class Category {
   static async getOneById(id) {
     const response = await db.query("SELECT * FROM categories_table WHERE category_id = $1;", [id]);
     if (response.rows.length != 1) {
-      throw new Error("Unable to locate item.")
+      throw new Error("Unable to locate category by id.")
+    }
+
+    return new Category(response.rows[0]);
+  }
+
+  static async getOneByName(name) {
+    const response = await db.query("SELECT * FROM categories_table WHERE category = $1;", [name]);
+    if (response.rows.length != 1) {
+      throw new Error("Unable to locate category by name.")
     }
 
     return new Category(response.rows[0]);

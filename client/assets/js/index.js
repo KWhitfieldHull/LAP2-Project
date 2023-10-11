@@ -1,23 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  console.log(localStorage.getItem('token'))
   const showItemsButton = document.getElementById('showItemsButton');
   const itemsList = document.getElementById('itemsList');
   const categoriesList = document.getElementById('categoriesList');
   const resetItemsButton = document.getElementById('resetItemsButton');
-  const logoutButton = document.getElementById("log-out")
+  const logInButtons = document.getElementById('logInButtons');
+  const accountButton = document.getElementById('accountButton');
+
+  if (localStorage.getItem('token') == null) {
+    window.location.href = './login.html'
+  }
+  if (localStorage.getItem('token') != null) {
+    accountButton.href = "./account/"
+    const logOut = document.createElement('a')
+    logOut.href = '#'
+    logOut.id = 'log-out'
+    logOut.textContent = 'Log Out'
+    logInButtons.appendChild(logOut)
+  }
+
+
+  const getBidById = async (id) => {
+    try {
+      const options = {
+        headers: {
+          Authorisation: localStorage.getItem("token")
+        },
+        mode: 'cors'
+      }
+      const response = await fetch(`http://localhost:3000/bids/${id}`, options);
+      const obj = await response.json();
+      const bids = await obj.data;
+      return bids['highest_bid']
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   const getAllItems = async () => {
     try {
       const options = {
         headers: {
-            Authorisation: localStorage.getItem("token")
+          Authorisation: localStorage.getItem("token")
         }
-    }
+      }
       const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
-      items.forEach((item) => {
-        const e = addItem(item)
+      items.forEach(async (item) => {
+        const e = await addItem(item)
         itemsList.appendChild(e)
       })
     } catch (err) {
@@ -57,10 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
 
-
   const getAllCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3000/categories");
+      const options = {
+        headers: {
+          Authorisation: localStorage.getItem("token")
+        }
+      }
+      const response = await fetch("http://localhost:3000/categories", options);
       const obj = await response.json();
       const categories = await obj.data;
       categories.forEach((category) => {
@@ -69,13 +104,19 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   };
   getAllCategories()
 
   const getItemsFromCategory = async (cat) => {
     try {
-      const response = await fetch("http://localhost:3000/items");
+      const options = {
+        headers: {
+          Authorisation: localStorage.getItem("token")
+        }
+      }
+      const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
       items.forEach((item) => {
@@ -86,12 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   }
+
+
   // add item
-  const addItem = (item) => {
+  const addItem = async (item) => {
     const content = document.createElement('div')
     let id = item['id']
+    let bid = await getBidById(id)
     content.id = `item-${id}`
     content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom">
@@ -105,13 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
-                            <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add To My List</button>
+                            <div class="input-group mb-3">
+                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
+                            
+                              <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
+                              <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
+                            </div>
                         </div>
                         </div>
                     </div>
                 </div>
 `
     return content;
+
   }
 
   //add category
@@ -127,9 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return content;
   }
 
-  logoutButton.addEventListener('click', () => {
-    localStorage.removeItem("token")
-  })
 
 
   const listenItem = (id) => {
@@ -160,6 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         }
       }
+    }
+  })
+  document.addEventListener('click', (event) => {
+    if (event.target.matches("#log-out")) {
+      console.log('hi')
+      localStorage.removeItem("token")
+      window.location.href = './login.html'
     }
   })
 
