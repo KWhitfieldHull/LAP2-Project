@@ -10,7 +10,6 @@ async function index(req, res) {
 }
 async function showItemBid(req, res) {
     try {
-        console.log('Here')
         const item_id = parseInt(req.params.itemid);
         const highestBidOBJ = await Bid.getBidByItemId(item_id);
         res.status(200).send({data: highestBidOBJ});
@@ -30,44 +29,25 @@ async function showUserBid(req, res) {
 async function bidHandler(req,res){
     try{
     //get item_id, user_id, proposed bid
-    item_id = res.body.item_id
-    proposed_bid = res.body.proposed_bid
-    user_id = res.body.user_id
+    item_id = req.body.item_id
+    proposed_bid = req.body.proposed_bid
+    user_id = req.body.user_id
+    console.log("hi", proposed_bid)
     // bid has to be more than 0
     if (proposed_bid<0){
         res.status(403).send("Bid has to be more than 0!")
     }
-    //check if item_id is already in db
-    let itemCheck = await Bid.getBidByItemId(item_id)
-    //item not in bids_table then add:
-    if (itemCheck ===-1){
-        //post
-        newBid = Bid.createBid(user_id, item_id, proposed_bid)
-        res.status(200).send({newBid})
-    }else{
-        //check bid is higher than currentbid
-        currentBid = await (Bid.getBidByItemId(item_id)).highest_bid
-        if (proposed_bid>currentBid){
-            //patch
-            updatedBid = await Bid.updateBid(user_id, item_id, proposed_bid)
-            res.status(200).send(updatedBid)
-        }
-        else{
-            res.status(403).send("Bid needs to be higher than max Bid!")
-        }
+    currentBid = await (await Bid.getBidByItemId(item_id)).highest_bid
+    if (proposed_bid>currentBid){
+        //patch
+        updatedBid = await Bid.updateBid(user_id, item_id, proposed_bid)
+        res.status(200).send(updatedBid)
+    }
+    else{
+        res.status(403).send("Bid needs to be higher than max Bid!")
     }
     }catch(error){
         res.status(404).send({"error": error.message})
     }   
 }
-async function deleteBid(req, res){
-    try{
-        const item_id = parseInt(req.params.itemid);
-        await Bid.deleteBid(item_id)
-        res.status(204).end();
-    }catch(error){
-        res.status(404).json({"error": error.message})
-
-    }
-}
-module.exports={index, showItemBid, showUserBid, bidHandler, deleteBid}
+module.exports={index, showItemBid, showUserBid, bidHandler}

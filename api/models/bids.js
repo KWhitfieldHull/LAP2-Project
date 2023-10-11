@@ -23,10 +23,9 @@ class Bid {
         return new Bid(response.rows[0]);
     }
     static async getBidByItemId(item_id) {
-        console.log("Second log")
         const response = await db.query("SELECT * FROM bids_table WHERE item_id = $1;", [item_id]);
         if (response.rows.length === 0) {
-            return -1
+            throw new Error("no item was found, response 0 rows")
         }
         return new Bid(response.rows[0]);
     }

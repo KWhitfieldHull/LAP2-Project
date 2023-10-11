@@ -7,7 +7,5 @@ bidsRouter.get('/', bidsController.index);
 bidsRouter.get('/:itemid', bidsController.showItemBid);
 bidsRouter.get('/user/:userid', bidsController.showUserBid);
 bidsRouter.patch('/bidsupdated', bidsController.bidHandler);
-bidsRouter.post('/newbid', bidsController.bidHandler);
-bidsRouter.delete('/:itemid', authenticator, bidsController.deleteBid);
 
 module.exports = bidsRouter;
