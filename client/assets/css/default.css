@@ -1,6 +1,4 @@
 body {
-    background-size: cover;
-    background-repeat: no-repeat;
     /* margin: 40px auto; */
     /* max-width: 650px; */
     line-height: 1.6;
@@ -10,7 +8,9 @@ body {
     height: 100dvh;
     display: flex;
     flex-direction: column;
-
+    /* background: url('../img/bg.png');
+    background-repeat: no-repeat;
+    background-position-y: bottom; */
 }
 
 .shadow-sm {

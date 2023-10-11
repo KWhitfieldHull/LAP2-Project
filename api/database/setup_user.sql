@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS items_table;
+DROP TABLE IF EXISTS bids_table;
+DROP TABLE IF EXISTS items_table CASCADE; 
 DROP TABLE IF EXISTS token_table;
 DROP TABLE IF EXISTS users_table;
 DROP TABLE IF EXISTS categories_table;
@@ -40,7 +41,7 @@ CREATE TABLE bids_table(
     bid_id INT GENERATED ALWAYS AS IDENTITY, 
     user_id INT NOT NULL, 
     item_id INT UNIQUE NOT NULL,
-    highest_bid INT NOT NULL, 
+    highest_bid INT DEFAULT 0,
     PRIMARY KEY(bid_id), 
     FOREIGN KEY (item_id) REFERENCES items_table("item_id"), 
     FOREIGN KEY (user_id) REFERENCES users_table("user_id")
@@ -70,6 +71,8 @@ INSERT INTO items_table (name, category_id, user_id, image_url, description) VAL
 
 INSERT INTO bids_table(user_id, item_id, highest_bid) VALUES
 (1, 1, 500), 
-(2,2,30);
+(2,2,30),
+(1, 3, 444), 
+(2,4,15);
 
 
