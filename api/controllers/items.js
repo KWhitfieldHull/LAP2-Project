@@ -17,7 +17,15 @@ async function title(req, res) {
     })
 }
 
-
+async function show(req, res) {
+    try {
+        const id = parseInt(req.params.id);
+        const items = await Item.getOneById(id);
+        res.status(200).send({ data: items });
+    } catch (err) {
+        res.status(404).send({ "error": err.message })
+    }
+}
 
 const create = async (req, res) => {
     try {

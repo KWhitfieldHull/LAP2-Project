@@ -11,6 +11,7 @@ bidsRouter.get('/:userid', authenticator, bidsController.showUserBid);
 bidsRouter.patch('/bidsupdated', authenticator, bidsController.bidHandler);
 bidsRouter.post('/newbid', authenticator, bidsController.bidHandler);
 // bidsRouter.patch('/:id', authenticator, bidsController.bidHandler);
-// bidsRouter.delete('/:id', authenticator, bidsController.destroy);
+bidsRouter.delete('/:itemid', authenticator, bidsController.destroy);
+
 
 module.exports = bidsRouter;
