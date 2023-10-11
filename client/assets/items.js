@@ -34,9 +34,15 @@ function createPostElement (data) {
 /////////LOAD POST
 
 
-async function loadDiary () {
+async function loadItems () {
     try {
-      const response = await fetch("http://localhost:3000/items");
+        console.log("WE ARE HERE")
+        const options = {
+            headers: {
+                Authorisation: localStorage.getItem("token")
+            }
+        }
+      const response = await fetch("http://localhost:3000/items", options);
       const posts = await response.json();
       console.log(posts);
       const test = posts.data;
@@ -58,7 +64,7 @@ async function loadDiary () {
     }
 }
 
-loadDiary();
+loadItems();
 
 
 
