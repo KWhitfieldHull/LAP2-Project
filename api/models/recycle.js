@@ -7,20 +7,22 @@ class Recycle {
         this.query = query;
     }
 
-    static async isRecyclable() {
-        console.log("recycleable");
+    static async isRecyclable(data) {
+        const {item} = data;
+        //console.log("recycling");
         const openai = new OpenAI({
             apiKey: process.env.OPENAI_KEY
         });
         
 
         const chatCompletion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: 'is a bike recyclable?' }],
+            messages: [{ role: 'user', content: `is a ${item} recyclable?` }],
             model: 'gpt-3.5-turbo',
         });
         
-
-        console.log(chatCompletion.choices);
+        const answer = chatCompletion.choices[0].message.content;
+        //console.log(answer);
+        return answer;
         
 
 

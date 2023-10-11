@@ -4,7 +4,7 @@ const recycleController = require('../controllers/recycle');
 
 const recycleRouter = Router();
 
-recycleRouter.get('/', recycleController.index);
+recycleRouter.post('/', recycleController.index);
 
 
 module.exports = recycleRouter;

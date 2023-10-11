@@ -4,7 +4,7 @@ const db = require("../database/connect_user");
 
 class Token {
 
-    constructor({ token_id, user_id, token }){
+    constructor({ token_id, user_id, token }) {
         this.token_id = token_id;
         this.user_id = user_id;
         this.token = token;

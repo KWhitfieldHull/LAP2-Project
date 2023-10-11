@@ -34,17 +34,16 @@ function createPostElement (data) {
 /////////LOAD POST
 
 
-async function loadItems () {
+async function loadDiary () {
     try {
-        console.log("WE ARE HERE")
         const options = {
             headers: {
                 Authorisation: localStorage.getItem("token")
             }
         }
-      const response = await fetch("http://localhost:3000/items", options);
+        console.log(options.headers.Authorisation)
+      const response = await fetch("http://localhost:3000/items");
       const posts = await response.json();
-      console.log(posts);
       const test = posts.data;
      
       
@@ -60,11 +59,11 @@ async function loadItems () {
         //window.location.assign("./index.html");
       }
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
 }
 
-loadItems();
+loadDiary();
 
 
 

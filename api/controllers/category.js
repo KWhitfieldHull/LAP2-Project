@@ -6,14 +6,23 @@ async function index(req, res) {
     res.status(200).send({ data: items });
 
   } catch (err) {
-    res.status(500).send({ error: err.message })
+    res.status(500).send({ 'error': err.message })
+  }
+}
+
+async function show(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const items = await Category.getOneById(id);
+    res.status(200).send({ data: items });
+  } catch (err) {
+    res.status(404).send({ "error": err.message })
   }
 }
 
 
 
 
-
 module.exports = {
-  index
+  index, show
 }
