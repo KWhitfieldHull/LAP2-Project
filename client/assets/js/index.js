@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getAllItems = async () => {
     try {
-      const response = await fetch("http://localhost:3000/items");
+      const options = {
+        headers: {
+            Authorisation: localStorage.getItem("token")
+        }
+    }
+      const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
       items.forEach((item) => {
@@ -31,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   };
   getAllItems()
@@ -68,7 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3000/categories");
+      const options = {
+        headers: {
+            Authorisation: localStorage.getItem("token")
+        }
+    }
+      const response = await fetch("http://localhost:3000/categories", options);
       const obj = await response.json();
       const categories = await obj.data;
       categories.forEach((category) => {
@@ -77,13 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   };
   getAllCategories()
 
   const getItemsFromCategory = async (cat) => {
     try {
-      const response = await fetch("http://localhost:3000/items");
+      const options = {
+        headers: {
+            Authorisation: localStorage.getItem("token")
+        }
+    }
+      const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
       items.forEach((item) => {
@@ -94,10 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } catch (err) {
       console.error(err)
+      window.location.assign("login.html")
     }
   }
   // add item
   const addItem = (item) => {
+
+
+
     const content = document.createElement('div')
     let id = item['id']
     content.id = `item-${id}`
@@ -125,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 `
     return content;
+  
   }
 
   //add category
@@ -179,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = './login.html'
     }
   })
+
 
 
 })

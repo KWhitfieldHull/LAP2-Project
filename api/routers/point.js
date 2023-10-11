@@ -5,12 +5,12 @@ const pointController = require('../controllers/point')
 const pointRouter = Router();
 
 //admin and logged in
-pointRouter.get('/', pointController.showAllPoints);
-pointRouter.patch('/resetpoints/:id', pointController.resetPointsById)
+pointRouter.get('/', authenticator, pointController.showAllPoints);
+pointRouter.patch('/resetpoints/:id', authenticator, pointController.resetPointsById)
 
 //logged in 
-pointRouter.get('/:id', pointController.showPointsById);
-pointRouter.patch('/:id', pointController.gainPoint);
-pointRouter.patch('/redeem/:id', pointController.redeem);
+pointRouter.get('/:id', authenticator, pointController.showPointsById);
+pointRouter.patch('/:id', authenticator, pointController.gainPoint);
+pointRouter.patch('/redeem/:id', authenticator, pointController.redeem);
 
 module.exports = pointRouter;

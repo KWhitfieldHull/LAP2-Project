@@ -36,6 +36,7 @@ const getCategoryByName = async (category) => {
 
 const getAllItems = async () => {
   try {
+
     const response = await fetch("http://localhost:3000/items");
     const obj = await response.json();
     const items = await obj.data;
@@ -43,8 +44,10 @@ const getAllItems = async () => {
       const e = addItem(item)
       itemsList.appendChild(e)
     })
+
   } catch (err) {
     console.error(err)
+    window.location.assign("login.html")
   }
 };
 getAllItems()

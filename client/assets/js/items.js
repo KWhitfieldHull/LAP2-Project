@@ -34,14 +34,13 @@ function createPostElement (data) {
 /////////LOAD POST
 
 
-async function loadDiary () {
+async function loadItems () {
     try {
         const options = {
             headers: {
                 Authorisation: localStorage.getItem("token")
             }
         }
-        console.log(options.headers.Authorisation)
       const response = await fetch("http://localhost:3000/items");
       const posts = await response.json();
       const test = posts.data;
@@ -56,14 +55,14 @@ async function loadDiary () {
           container.appendChild(elem);
         });
       } else {
-        //window.location.assign("./index.html");
+        //window.location.assign("./login.html");
       }
     } catch (error) {
       console.log("error");
     }
 }
 
-loadDiary();
+loadItems();
 
 
 
