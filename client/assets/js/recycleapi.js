@@ -15,7 +15,8 @@ document.getElementById("recyleForm").addEventListener("submit", async (e) => {
     const options = {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorisation: localStorage.getItem("token")
         },
         body: JSON.stringify(form)
     }
