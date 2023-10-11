@@ -45,9 +45,9 @@ class Item {
         return response.rows[0]
     }
 
-    static async update(data, id) {
+    static async updateItem(data, id) {
         const { name, user_id, image_url, description, category } = data;
-        const response = await db.query("UPDATE items_table SET name = $1, user_id =$2, image_url =$3, description =$4, category =$5 WHERE item_id = $6 RETURNING *;",
+        const response = await db.query("UPDATE items_table SET name = $1, user_id =$2, image_url =$3, description =$4, category_id =$5 WHERE item_id = $6 RETURNING *;",
             [name, user_id, image_url, description, category, id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to update item")

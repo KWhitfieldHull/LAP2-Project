@@ -1,10 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  console.log(localStorage.getItem('token'))
   const showItemsButton = document.getElementById('showItemsButton');
   const itemsList = document.getElementById('itemsList');
   const categoriesList = document.getElementById('categoriesList');
   const resetItemsButton = document.getElementById('resetItemsButton');
-  const logoutButton = document.getElementById("log-out")
+  const logInButtons = document.getElementById('logInButtons');
+  const accountButton = document.getElementById('accountButton');
+
+  if (localStorage.getItem('token') == null) {
+    window.location.href = './login.html'
+  }
+  if (localStorage.getItem('token') != null) {
+    accountButton.href = "./account/"
+    const logOut = document.createElement('a')
+    logOut.href = '#'
+    logOut.id = 'log-out'
+    logOut.textContent = 'Log Out'
+    logInButtons.appendChild(logOut)
+  }
+
 
   const getAllItems = async () => {
     try {
@@ -148,9 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return content;
   }
 
-  logoutButton.addEventListener('click', () => {
-    localStorage.removeItem("token")
-  })
 
 
   const listenItem = (id) => {
@@ -183,7 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   })
-
+  document.addEventListener('click', (event) => {
+    if (event.target.matches("#log-out")) {
+      console.log('hi')
+      localStorage.removeItem("token")
+      window.location.href = './login.html'
+    }
+  })
 
 
 
