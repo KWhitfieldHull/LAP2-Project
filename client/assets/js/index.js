@@ -19,22 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
     logInButtons.appendChild(logOut)
   }
 
-  const updateBid = async (data) =>{
-    try{
+  const updateBid = async (data) => {
+    try {
       const options = {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorisation: localStorage.getItem("token")
-        }, 
+        },
         mode: 'cors',
         body: JSON.stringify(data)
       }
-      console.log(options.body)
       const response = await fetch('http://localhost:3000/bids/bidsupdated', options)
       const obj = await response.json();
-      console.log(obj)
-    }catch(error){
+    } catch (error) {
       console.error(error)
     }
   }
@@ -166,13 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="col-md-8">
                         <div class="card-body">
                             <h4 class="card-title mb-2" id="itemTitle-${item['id']}">${item['name']}</h4>
-                            <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
+                            <span href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</span>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
-                            <div class="input-group mb-3" id="item${id}">
-                            <label class="input-group-text" id="itemAddBidLabel-${item['id']}" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
+                            <div class="input-group mb-3" id="item${item['id']}">
+                            <label class="input-group-text" for="itemAddBid-${item['id']}">Bid:&nbsp;£<span id="currentBid-${item['id']}">${bid}</span></label>
                             
-                              <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
+                              <input type="number" class="form-control" id="itemAddBid-${item['id']}" placeholder="Your Bid" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
                               <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
                             </div>
                         </div>
@@ -223,16 +221,32 @@ document.addEventListener('DOMContentLoaded', () => {
           let id = Number(itemsList.childNodes[i].id.slice(-1))
           const item = listenItem(id).button
           item.addEventListener('click', () => {
+            // document.getElementById(`item${id}`).deleteItem(smallBidText)
             //Sets the ID of the item you clicked Add on
             const bidID = `itemAddBid-${id}`
+            const currentBid = parseInt(document.getElementById(`currentBid-${id}`).innerHTML)
             //gets the value of the bid
             const bidValue = document.getElementById(bidID).value
-            data = {item_id:id,proposed_bid: bidValue, user_id:3}
-            updateBid(data)
-            window.location.reload()
+            data = { item_id: id, proposed_bid: bidValue, user_id: 3 }
+            if (currentBid >= bidValue) {
+              document.getElementById(bidID).value = ''
+              document.getElementById(bidID).placeholder = 'Too Small'
+              document.getElementById(bidID).style.backgroundColor = '#ff4949'
+              setTimeout(() => {
+                document.getElementById(bidID).style.transition = '.5s'
+                document.getElementById(bidID).placeholder = 'Your Bid'
+                document.getElementById(bidID).style.backgroundColor = 'white'
+              }, 1000);
+
+            } else {
+
+              updateBid(data)
+              window.location.reload()
+            }
+
             //TEMP COMMENTED RESTORE LATER THIS IS JUST TESTING
             //deleteItem(listenItem(id).item)
-          })
+          }, { once: true })
         }
       }
     }

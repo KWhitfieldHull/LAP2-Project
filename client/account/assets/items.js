@@ -5,7 +5,28 @@ const itemCategoryAdd = document.getElementById('itemCategoryAdd')
 const itemCategoryEdit = document.getElementById('itemCategoryEdit')
 const itemDescriptionAdd = document.getElementById('itemDescriptionAdd')
 const itemAddressAdd = document.getElementById('itemAddressAdd')
+let userID;
 
+
+const getAllItems = async () => {
+  try {
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token")
+      }
+    }
+    const response = await fetch(`http://localhost:3000/items/user/${userID}`, options);
+    const obj = await response.json();
+    const items = await obj.data;
+    items.forEach(async (item) => {
+      const e = await addItem(item)
+      itemsList.appendChild(e)
+    })
+
+  } catch (err) {
+    console.error(err)
+  }
+};
 const getAllCategories = async () => {
   try {
     const options = {
@@ -44,26 +65,41 @@ const getCategoryByName = async (category) => {
   }
 }
 
-const getAllItems = async () => {
-  try {
-    const options = {
-      headers: {
-        Authorisation: localStorage.getItem("token")
-      }
-    }
-    const response = await fetch("http://localhost:3000/items", options);
-    const obj = await response.json();
-    const items = await obj.data;
-    items.forEach(async (item) => {
-      const e = await addItem(item)
-      itemsList.appendChild(e)
-    })
 
-  } catch (err) {
-    console.error(err)
+async function loadUserID() {
+
+  const form = {
+    token: localStorage.getItem("token")
+  };
+
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
   }
-};
-getAllItems()
+
+  const response = await fetch("http://localhost:3000/users/token", options);
+  const result = await response.json();
+
+  if (response.status == 201) {
+    userID = result.user.user_id;
+
+    getAllItems()
+  }
+}
+
+
+
+
+
+
+
+
+
+loadUserID();
+
 
 // add item
 const addItem = async (item) => {
@@ -79,7 +115,6 @@ const addItem = async (item) => {
                         <div class="col-md-8">
                         <div class="card-body">
                             <h4 class="card-title mb-2" id="itemTitle-${item['id']}">${item['name']}</h4>
-                            <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div>
@@ -150,7 +185,7 @@ document.getElementById("addItemForm").addEventListener("submit", async (e) => {
           name: name.value,
           description: description.value,
           category: await getCategoryByName(category.value),
-          user_id: 1
+          user_id: userID
         };
         const options = {
           method: "POST",
