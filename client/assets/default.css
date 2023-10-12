@@ -1,0 +1,140 @@
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* margin: 40px auto; */
+    /* max-width: 650px; */
+    line-height: 1.6;
+    font-size: 16px;
+    color: #444444;
+    font-family: 'Montserrat', sans-serif;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.shadow-sm {
+    z-index: 1;
+}
+
+a.nav-link.active {
+    border-bottom: 1px solid black;
+}
+
+
+h1, h2, h3 {
+    line-height: 1.2
+}
+
+
+fieldset {
+    border: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: 200px;
+    width: 1000px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* section {
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70%;
+    min-height: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 1rem;
+
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
+.custom {
+    list-style: none;
+}
+
+.btn-add {
+    background-color: #0CB0B3;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #21e0e3;
+    color: white;
+}
+
+
+/* Account page */
+.accountCategory {
+    color: #444;
+    white-space: nowrap;
+}
+
+.accountCategory h3, .accountCategory p {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#mainBlock a {
+    text-decoration: none;
+}
+
+.accountCategory:hover {
+    background-color: #139B77;
+    transition: .25s;
+    color: white;
+    border: 0;
+}
+
+.btn-manage {
+    background-color: #127ca9;
+    color: white;
+}
+
+.btn-manage:hover {
+    background-color: #127ca9c9;
+    color: white;
+}
+
+.btn-manage+.btn-manage {
+    margin-left: 1rem;
+}
+
+/* categories page */
+.itemCategories {
+    color: #444;
+    white-space: nowrap;
+}
+
+.itemCategories h3, .itemCategories p {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.itemCategories:hover {
+    background-color: #139B77;
+    transition: .25s;
+    color: white;
+    border: 0;
+}

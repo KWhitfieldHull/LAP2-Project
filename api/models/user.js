@@ -38,6 +38,7 @@ class User {
 
 
     async update(data) {
+        let oldPasswordChecker = false;
         let { username, password, address } = data;
  
         if (username == '') {
@@ -45,23 +46,39 @@ class User {
         }
         if (password == '') {
             password = this.password;
+            oldPasswordChecker = true;
         } 
         if (address == '') {
             address = this.address;
         }
 
-        const saltRounds = 10;
-        const hash = await bcrypt.hash(password, saltRounds);
-
-        const response = await db.query("UPDATE users_table SET username = $1, password = $2, address = $3 WHERE user_id = $4 RETURNING *;",
+        if (!oldPasswordChecker) {
+            const saltRounds = 10;
+            let hash = await bcrypt.hash(password, saltRounds);
+            const response = await db.query("UPDATE users_table SET username = $1, password = $2, address = $3 WHERE user_id = $4 RETURNING *;",
             [ username, hash, address, this.id ]);
+
+            if (response.rows.length != 1) {
+                throw new Error("Unable to update User.")
+            }
+            return new User(response.rows[0]);
+        } else {
+            let hash = this.password;
+            const response = await db.query("UPDATE users_table SET username = $1, password = $2, address = $3 WHERE user_id = $4 RETURNING *;",
+            [ username, hash, address, this.id ]);
+
+            if (response.rows.length != 1) {
+                throw new Error("Unable to update User.")
+            }
+            return new User(response.rows[0]);
+        }
+        
+
+        
 
 
         
-        if (response.rows.length != 1) {
-            throw new Error("Unable to update User.")
-        }
-        return new User(response.rows[0]);
+        
     }
 
     
