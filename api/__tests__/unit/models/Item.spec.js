@@ -61,10 +61,12 @@ describe('getAll', () => {
 
   describe('create', () => {
     it('resolves with item on successful db query', async () => {
-      let itemData = { name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' }
+      let itemData = { name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category_id: 1 }
       jest.spyOn(db, 'query')
         .mockResolvedValueOnce({ rows: [{ ...itemData, item_id: 1 }] });
-      const result = await Item.create(itemData);
+  
+        const result = await Item.create(itemData);
+        console.log(result)
       expect(result).toBeTruthy()
       expect(result).toHaveProperty('item_id')
       expect(result).toHaveProperty('name')
@@ -109,15 +111,42 @@ describe('getAll', () => {
   })
 
   describe('update', () => {
-    it('should throw an error if name is missing', async () => {
-      jest.spyOn(db, 'query').mockRejectedValue(new Error('Parameters Missing'))
+    it('should throw an error if stuff is missing', async () => {
+      jest.spyOn(db, 'query').mockRejectedValue(new Error('Unable to update item'))
       try {
-        const item = new Item({name: "n1",category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' })
-        console.log("testing purposes remove later");
-        await Item.update({ name: 'puppet' }, item.item_id);
+        const item = new Item({ item_id: 1, name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' })
+        await Item.updateItem({ name: 'puppet' })
       } catch (error) {
         expect(error).toBeTruthy()
-        expect(error.message).toBe('Parameters Missing')
+        expect(error.message).toBe('Unable to update item')
+      }
+    })
+  })
+
+
+
+  describe('destroy', () => {
+    it('should return the deleted item', async () => {
+      const item = new Item({})
+      jest.spyOn(db, 'query')
+        .mockResolvedValueOnce({ rows: [{ item_id: 1, name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' }] })
+
+      const result = await item.destroy(1)
+
+      expect(result).toBeInstanceOf(Item)
+      expect(result.id).toBe(1)
+      expect(result).not.toEqual(item)
+    })
+
+    it('should throw an error if we cannot locate the item', async () => {
+      jest.spyOn(db, 'query')
+        .mockResolvedValueOnce({ rows: [{}, {}] })
+
+      try {
+        const item = new Item({name: 'g1', user_id: 1, image_url: 'u1', description: 'd1',category: 'c1' })
+        await item.destroy({ name: 'puppet' })
+      } catch (error) {
+        expect(error).toBeTruthy()
       }
     })
   })

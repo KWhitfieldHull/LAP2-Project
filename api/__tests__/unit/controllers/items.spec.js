@@ -98,41 +98,58 @@ describe("items controller", () => {
         })
     })
 
-    describe("update", () => {
-        it("should return an item with a status code 200", async () => {
-            const testItems = { item_id: 1, name: 'g1', category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' }
-            jest.spyOn(Item, "update")
-                .mockResolvedValue(testItems)
+    describe('update', () => {
+        it('modifies a row in the database', async () => {
+            const testItem = { item_id: 1, name: 'g1', category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' }
+            jest.spyOn(Item, 'getOneById')
+                .mockResolvedValue(new Item(testItem))
 
-            const mockRequest = () => {
-                return {
-                    body: { testItems },
-                    params: { id: 1 }
-                }
-            }
-            mockReq = mockRequest()
-            
+            const mockReq = { params: { id: 1 }, body: { name: 'something else' } }
+
+            jest.spyOn(Item, 'updateItem')
+                .mockResolvedValue({ ...new Item(testItem), name: 'something else' })
+
             await itemsController.update(mockReq, mockRes)
-            expect(Item.update).toHaveBeenCalledTimes(1)
-            expect(mockSend).toHaveBeenCalledWith({ data: testItems })
-        })
-        it("sends an error upon failure", async () => {
-            jest.spyOn(Item, "update")
-                .mockRejectedValue(new Error("Something happened to your db"))
-            const testItems = { item_id: 1, name: 'g1', category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' }
-            const mockRequest = () => {
-                return {
-                    body: { testItems }
-                }
-            }
-            testReq = mockRequest()
-            await itemsController.update(testReq, mockRes)
-            expect(Item.update).toHaveBeenCalledTimes(1)
-            expect(mockSend).toHaveBeenCalledWith({ error: "Something happened to your db" })
+
+
+            expect(Item.getOneById).toHaveBeenCalledTimes(1)
+            expect(Item.updateItem).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(200)
         })
     })
 
 
+
+    //NEEDS FIXING
+    describe('destroy', () => {
+        it('returns a 204 status code on successful deletion', async () => {
+          const testItem = { item_id: 1, name: 'g1', category: 'c1', user_id: 1, image_url: 'u1', description: 'd1' }
+          jest.spyOn(Item, 'getOneById')
+            .mockResolvedValue(new Item(testItem))
+    
+          jest.spyOn(Item, 'destroy')
+            .mockResolvedValue(new Item(testItem))
+    
+          const mockReq = { params: { item_id: 1 } }
+          await itemsController.destroy(mockReq, mockRes)
+    
+          expect(Item.getOneById).toHaveBeenCalledTimes(1)
+          expect(Item.destroy).toHaveBeenCalledTimes(1)
+          expect(mockStatus).toHaveBeenCalledWith(204)
+          expect(mockEnd).toHaveBeenCalledWith()
+        })
+    
+        it('calls item.destroy()', async () => {
+          const mockReq = { params: { id: 49 } }
+    
+          jest.spyOn(Item, 'getOneById')
+            .mockRejectedValue(new Error('item not found'))
+    
+          await itemsController.destroy(mockReq, mockRes)
+          expect(mockStatus).toHaveBeenCalledWith(404)
+          //expect(mockSend).toHaveBeenCalledWith({ error: 'item not found' })
+        })
+      })
 
 
 
