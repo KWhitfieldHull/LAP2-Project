@@ -4,20 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const itemsList = document.getElementById('itemsList');
   const categoriesList = document.getElementById('categoriesList');
   const resetItemsButton = document.getElementById('resetItemsButton');
-  const logInButtons = document.getElementById('logInButtons');
-  const accountButton = document.getElementById('accountButton');
 
-  if (localStorage.getItem('token') == null) {
-    window.location.href = './login.html'
-  }
-  if (localStorage.getItem('token') != null) {
-    accountButton.href = "./account/"
-    const logOut = document.createElement('a')
-    logOut.href = '#'
-    logOut.id = 'log-out'
-    logOut.textContent = 'Log Out'
-    logInButtons.appendChild(logOut)
-  }
+
 
   const updateBid = async (data) => {
     try {
@@ -168,11 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div class="input-group mb-3" id="item${item['id']}">
-                            <label class="input-group-text" for="itemAddBid-${item['id']}">Bid:&nbsp;£<span id="currentBid-${item['id']}">${bid}</span></label>
+                            <label class="input-group-text" for="itemAddBid-${item['id']}">Discount:&nbsp;£<span id="currentBid-${item['id']}">${bid}</span></label>
                             
-                              <input type="number" class="form-control" id="itemAddBid-${item['id']}" placeholder="Your Bid" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
+                              <input type="number" class="form-control" id="itemAddBid-${item['id']}" placeholder="Your bid" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
                               <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
                             </div>
+                            <div>${await countDownFunction(item['id'])}</div>
                         </div>
                         </div>
                     </div>
@@ -251,16 +240,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   })
-  document.addEventListener('click', (event) => {
-    if (event.target.matches("#log-out")) {
-      console.log('hi')
-      localStorage.removeItem("token")
-      window.location.href = './login.html'
-    }
-  })
+
 
 
 
 })
 
 
+////// Countdown function /////////
+
+//get time for each item using item id
+async function getBidExpires(id) {
+  try {
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token"),
+        'Content-Type': 'application/json'
+      }
+    }
+    let response = await fetch(`http://localhost:3000/items/expiresat/${id}`, options);
+    let bidObject = await response.json();
+
+    let bid_expires = bidObject.bid_expires
+    console.log(bid_expires)
+    return bid_expires
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+// let obj2
+// async function x() {
+//   obj2 = await getBidExpires(1);
+// }
+// x();
+
+const countDownFunction = (id) => setInterval(async function () {
+
+  // Get today's date and time
+  let now = new Date().getTime();
+  countDownDate = new Date(await getBidExpires(id)).getTime();
+
+  // Find the distance between now and the count down date
+  let distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = `Expired`;
+  }
+}, 1000);
