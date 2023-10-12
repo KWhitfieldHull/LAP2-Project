@@ -19,6 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
     logInButtons.appendChild(logOut)
   }
 
+  const updateBid = async (data) =>{
+    try{
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorisation: localStorage.getItem("token")
+        }, 
+        mode: 'cors',
+        body: JSON.stringify(data)
+      }
+      console.log(options.body)
+      const response = await fetch('http://localhost:3000/bids/bidsupdated', options)
+      const obj = await response.json();
+      console.log(obj)
+    }catch(error){
+      console.error(error)
+    }
+  }
 
   const getBidById = async (id) => {
     try {
@@ -137,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let id = item['id']
     let bid = await getBidById(id)
     content.id = `item-${id}`
+    //itemAddBid-${item['id']}
     content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom">
                     <div class="row g-0">
@@ -149,8 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
-                            <div class="input-group mb-3">
-                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
+                            <div class="input-group mb-3" id="item${id}">
+                            <label class="input-group-text" id="itemAddBidLabel-${item['id']}" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
                             
                               <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
                               <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
@@ -203,7 +223,15 @@ document.addEventListener('DOMContentLoaded', () => {
           let id = Number(itemsList.childNodes[i].id.slice(-1))
           const item = listenItem(id).button
           item.addEventListener('click', () => {
-            deleteItem(listenItem(id).item)
+            //Sets the ID of the item you clicked Add on
+            const bidID = `itemAddBid-${id}`
+            //gets the value of the bid
+            const bidValue = document.getElementById(bidID).value
+            data = {item_id:id,proposed_bid: bidValue, user_id:3}
+            updateBid(data)
+            window.location.reload()
+            //TEMP COMMENTED RESTORE LATER THIS IS JUST TESTING
+            //deleteItem(listenItem(id).item)
           })
         }
       }
