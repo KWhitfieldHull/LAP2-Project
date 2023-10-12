@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/default.css">
+    <script src="./assets/js/bootstrap.min.js" defer></script>
+    <script src="./assets/js/redeem.js" defer></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Redeem your points here!</title>
+</head>
+
+<body>
+    <div class="shadow-sm">
+    <div class="container">
+    <nav class="navbar navbar-expand-lg mx-5 mx-md-0" data-bs-theme="light">
+
+    <a class="navbar-brand fw-bold" href="./">
+      <img src="./assets/img/logo.png" alt="Logo" width="32" height="32" class="d-inline-block">
+      The Florin Recycle
+    </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="./index.html">Main Page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./categories.html">Categories</a>
+          </li>
+          <li class="nav-link">
+            <a type="button" href="./login.html" class="btn btn-success">My Account</a>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  </div>
+  <header class="py-5 bg-header text-center rounded-3">
+      <h1><span id="username"></span>, redeem your points here!</h1>
+      <p>You have <span id="points"></span> points!</p>
+  </header>
+  <main class="mb-5 flex-grow-1 border-end">
+    <div class="py-5 mb-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row">
+          <div class="col"><img src="./assets/img/morrisons.png"></div>
+          <div class="col"><img src="./assets/img/tesco.png"></div>
+          <div class="col"><img src="./assets/img/ms.png"></div>
+          <div class="col"><img src="./assets/img/asda.png"></div>
+          <div class="col"><img src="./assets/img/ikea.png"></div>
+        </div>
+      </div>
+
+    </div>
+      <div class="container h-100 px-4" id="voucherBlock">
+        <div class="row">
+        <div class="col">
+          <a href="#">
+            <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
+              <h3 class="mb-3">10% discount</h3>
+              <p>1 voucher per <b>100 points!</b></p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a href="#">
+            <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
+              <h3 class="mb-3">25% discount</h3>
+              <p>1 voucher per <b>250 points!</b></p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a href="#">
+            <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
+              <h3 class="mb-3">35% discount</h3>
+              <p>1 voucher per <b>350 points!</b></p>
+            </div>
+          </a>
+        </div>
+        </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
+
