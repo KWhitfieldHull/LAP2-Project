@@ -29,9 +29,11 @@ async function showUserBid(req, res) {
 async function bidHandler(req,res){
     try{
     //get item_id, user_id, proposed bid
-    item_id = req.body.item_id
-    proposed_bid = req.body.proposed_bid
-    user_id = req.body.user_id
+    console.log(req.body)
+    item_id = parseInt(req.body.item_id)
+    console.log(`id in bidhandler controller: ${item_id}`)
+    proposed_bid = parseInt(req.body.proposed_bid)
+    user_id = parseInt(req.body.user_id)
     console.log("hi", proposed_bid)
     // bid has to be more than 0
     if (proposed_bid<0){

@@ -5,17 +5,23 @@ body {
     font-size: 16px;
     color: #444444;
     font-family: 'Montserrat', sans-serif;
-    height: 100dvh;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    /* background: url('../img/bg.png');
-    background-repeat: no-repeat;
-    background-position-y: bottom; */
+    /* background: url('../img/bg.png') no-repeat bottom center; */
+    ;
 }
 
-.shadow-sm {
+/* 
+main {
+    background: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(77, 206, 220) 80%)
+} */
+
+#top-nav {
+    background: white;
     z-index: 1;
 }
+
 
 a.nav-link.active {
     border-bottom: 1px solid black;
