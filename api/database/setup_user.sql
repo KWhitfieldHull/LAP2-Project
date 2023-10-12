@@ -33,6 +33,7 @@ CREATE TABLE items_table (
     user_id INT NOT NULL, 
     image_url VARCHAR(65000),
     description VARCHAR (500) NOT NULL,
+    bid_expires TIMESTAMP,
     PRIMARY KEY (item_id),
     FOREIGN KEY (user_id) REFERENCES users_table("user_id"),
     FOREIGN KEY (category_id) REFERENCES categories_table("category_id")
@@ -63,11 +64,11 @@ INSERT INTO users_table (username, password, address, admin, points) VALUES
 ('testname2', 'notencryptedyet', '456 Fake Street', TRUE, 1000000);
 
 
-INSERT INTO items_table (name, category_id, user_id, image_url, description) VALUES 
-    ('Bottle', 1, 1, 'google.com/images', 'a very cool camera for sale'),
-    ('Glass item', 1, 1, 'google.com/images', 'a very cool football for sale'),
-    ('Metal item', 2, 1, 'google.com/images/laptop', 'a very cool laptop for sale'),
-    ('Paper item', 3, 1, 'google.com/images', 'a very cool camera for sale');
+INSERT INTO items_table (name, category_id, user_id, image_url, description, bid_expires) VALUES 
+    ('Bottle', 1, 1, 'google.com/images', 'a very cool camera for sale', NOW() + INTERVAL '5 days'),
+    ('Glass item', 1, 1, 'google.com/images', 'a very cool football for sale', NOW() + INTERVAL '5 days'),
+    ('Metal item', 2, 1, 'google.com/images/laptop', 'a very cool laptop for sale', NOW() + INTERVAL '5 days'),
+    ('Paper item', 3, 1, 'google.com/images', 'a very cool camera for sale', NOW() + INTERVAL '5 days');
 
 INSERT INTO bids_table(user_id, item_id, highest_bid) VALUES
 (1, 1, 500), 
