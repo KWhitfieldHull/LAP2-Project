@@ -61,27 +61,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">
     <div id="itemsList"></div>
-    <div class="card mb-3 border-0 col-md-8 col-12 p-4 border-bottom" id="item">
-          <div class="row g-0">
-              <div class="col-md-4">
-              <img src="../assets/default.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-              <div class="card-body">
-                  <h4 class="card-title mb-2" id="itemName">#itemName</h4>
-                  <a href="#" class="fs-6" id="category">#category</a>
-                  <hr>
-                  <p class="card-text"><span id="description">#description</span></p>
-                  <p class="card-text"><small class="text-body-secondary"><b>Address:</b> <span id="itemAddress">#itemAddress</span></small></p>
-              </div>
-              <div class="card-body">
-                <a class="btn btn-manage" href="#" id="addItemToMyList">Add to My List</a>
-                <a class="btn btn-manage" href="#" data-bs-toggle="modal" data-bs-target="#editItem">Edit</a>
-                <a class="btn btn-manage" href="#" id="deleteItem">Delete</a>
-              </div>
-              </div>
-          </div>
-      </div>
+    
               <div class="p-3 d-flex justify-content-center justify-content-sm-start">
       <a href="#" class="btn btn-add" id="addNewItem" data-bs-toggle="modal" data-bs-target="#addNewItemModal">Add New Item</a>
       </div>
@@ -121,28 +101,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="login-form">
+        <form id="editItemForm">
           <div class="mb-3">
               <label class="form-label" for="itemNameEdit">Item name:</label>
               <input class="form-control" type="text" id="itemNameEdit" name="itemNameEdit" placeholder="#itemNameEdit">
           </div>
           <div class="mb-3">
+              <label class="form-label" for="itemImageEdit">Item image:</label>
+              <input class="form-control" type="file" id="itemImageEdit" name="itemImageEdit" placeholder="#itemImageEdit">
+          </div>
+          <div class="mb-3">
             <label class="form-label" for="itemCategoryEdit">Item category:</label>
-              <input class="form-control" type="text" id="itemCategoryEdit" name="itemCategoryEdit" placeholder="#itemCategoryEdit">
+            <select class="form-select" id="itemCategoryEdit">
+              <option selected>#itemCategoryEdit</option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label" for="itemDescriptionEdit">Item description:</label>
               <input class="form-control" type="text" id="itemDescriptionEdit" name="itemDescriptionEdit" placeholder="#itemDescriptionEdit">
           </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label class="form-label" for="itemAddressEdit">Item address:</label>
               <input class="form-control" type="text" id="itemAddressEdit" name="itemAddressEdit" placeholder="#itemAddressEdit">
+          </div> -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-manage" id="itemEditButton">Save changes</button>
           </div>
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-manage">Save changes</button>
       </div>
     </div>
   </div>

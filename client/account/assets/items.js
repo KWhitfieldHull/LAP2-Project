@@ -238,10 +238,10 @@ document.addEventListener('click', event => {
               body: JSON.stringify(form)
             }
             const result = await fetch(`http://localhost:3000/items/${id}`, options);
-            console.log(result)
-            if (result.status == 201) {
-              alert("Entry Entered successfully")
-            }
+
+            alert("Entry updated successfully")
+            window.location.reload()
+
           });
         };
         fileReader.readAsDataURL(imageFile);
