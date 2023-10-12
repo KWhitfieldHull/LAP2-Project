@@ -11,6 +11,6 @@ pointRouter.patch('/resetpoints/:id', authenticator, pointController.resetPoints
 //logged in 
 pointRouter.get('/:id', authenticator, pointController.showPointsById);
 pointRouter.patch('/:id', authenticator, pointController.gainPoint);
-pointRouter.patch('/redeem/:id', authenticator, pointController.redeem);
+pointRouter.patch('/redeem/:id', pointController.redeem);
 
 module.exports = pointRouter;
