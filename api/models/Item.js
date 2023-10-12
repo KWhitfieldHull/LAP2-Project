@@ -59,13 +59,13 @@ class Item {
     }
 
     async destroy(id) {
-        const response = await db.query('DELETE FROM items_table WHERE item_id = $1 RETURNING *;', [id]);
-        const bidDelete = await db.query('DELETE FROM bids_table WHERE item_id = $1 RETURNING *;', [id]);
-        if (response.rows.length != 1) {
-            throw new Error("Unable to delete item from items table.")
-        }
+        const bidDelete = await db.query("DELETE FROM bids_table WHERE item_id = $1 RETURNING *;", [id]);
+        const response = await db.query("DELETE FROM items_table WHERE item_id = $1 RETURNING *;", [id]);
         if (bidDelete.rows.length != 1) {
             throw new Error("Unable to delete item from bids table.")
+        }
+        if (response.rows.length != 1) {
+            throw new Error("Unable to delete item from items table.")
         }
         return new Item(response.rows[0]);
     }
