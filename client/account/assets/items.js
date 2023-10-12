@@ -5,9 +5,28 @@ const itemCategoryAdd = document.getElementById('itemCategoryAdd')
 const itemCategoryEdit = document.getElementById('itemCategoryEdit')
 const itemDescriptionAdd = document.getElementById('itemDescriptionAdd')
 const itemAddressAdd = document.getElementById('itemAddressAdd')
+let userID;
 
 
+const getAllItems = async () => {
+  try {
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token")
+      }
+    }
+    const response = await fetch(`http://localhost:3000/items/user/${userID}`, options);
+    const obj = await response.json();
+    const items = await obj.data;
+    items.forEach(async (item) => {
+      const e = await addItem(item)
+      itemsList.appendChild(e)
+    })
 
+  } catch (err) {
+    console.error(err)
+  }
+};
 const getAllCategories = async () => {
   try {
     const options = {
@@ -47,75 +66,28 @@ const getCategoryByName = async (category) => {
 }
 
 
-let userID;
-async function loadUserID () {
-    
-    const form = {
-        token: localStorage.getItem("token")
-    };
-    
-    const options = {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(form)
-    }
+async function loadUserID() {
 
-    const response = await fetch("http://localhost:3000/users/token", options);
-    const result = await response.json();
+  const form = {
+    token: localStorage.getItem("token")
+  };
 
-    if (response.status == 201) {
-        userID = result.user.user_id;
-        getAllItems()
-    }
-}
-
-
-
-
-
-
-
-
-const getAllItems = async () => {
-  try {
-    const options = {
-      headers: {
-        Authorisation: localStorage.getItem("token")
-      }
-    }
-    
-    
-    const response = await fetch(`http://localhost:3000/items/user/${userID}`, options);
-    const obj = await response.json();
-    const items = await obj.data;
-    items.forEach(async (item) => {
-      const e = await addItem(item)
-      itemsList.appendChild(e)
-    })
-
-  } catch (err) {
-    console.error(err)
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
   }
-};
-loadUserID();
 
+  const response = await fetch("http://localhost:3000/users/token", options);
+  const result = await response.json();
 
+  if (response.status == 201) {
+    userID = result.user.user_id;
 
-
-
- //add category
- const addCategory = (category) => {
-  const content = document.createElement('div')
-  content.classList.add('form-check', 'mb-2')
-  content.innerHTML = `
-  <input class="form-check-input checkboxCategories" type="checkbox" value="${category['category']}" id="categoryItem-${category['id']}">
-  <label class="form-check-label" for="categoryItem-${category['id']}">
-      ${category['category']}
-  </label>
-`
-  return content;
+    getAllItems()
+  }
 }
 
 
@@ -126,22 +98,11 @@ loadUserID();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+loadUserID();
 
 
 // add item
 const addItem = async (item) => {
-  console.log(item);
   const content = document.createElement('div')
   let id = item['id']
   content.id = `item-${id}`
@@ -154,7 +115,6 @@ const addItem = async (item) => {
                         <div class="col-md-8">
                         <div class="card-body">
                             <h4 class="card-title mb-2" id="itemTitle-${item['id']}">${item['name']}</h4>
-                            <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div>

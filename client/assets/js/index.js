@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="col-md-8">
                         <div class="card-body">
                             <h4 class="card-title mb-2" id="itemTitle-${item['id']}">${item['name']}</h4>
-                            <a href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</a>
+                            <span href="#" class="fs-6" id="itemCategory-${item['id']}">${item['category']}</span>
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div class="input-group mb-3" id="item${item['id']}">
