@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(localStorage.getItem('token'))
+
   const showItemsButton = document.getElementById('showItemsButton');
   const itemsList = document.getElementById('itemsList');
   const categoriesList = document.getElementById('categoriesList');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoriesCheckboxed = document.querySelectorAll('.checkboxCategories');
     if (event.target.matches('#showItemsButton')) {
       let i = 0;
-      categoriesCheckboxed.forEach(element => {
+      categoriesCheckboxed.forEach(async element => {
         if (element.checked) {
           itemsList.innerHTML = ''
           getItemsFromCategory(element.value)
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (i === categoriesCheckboxed.length) {
           itemsList.innerHTML = ''
-          getAllItems()
+          await getAllItems()
         }
       })
     }
@@ -135,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch("http://localhost:3000/items", options);
       const obj = await response.json();
       const items = await obj.data;
-      items.forEach((item) => {
+      items.forEach(async (item) => {
         if (item.category === cat) {
-          const e = addItem(item)
+          const e = await addItem(item)
           itemsList.appendChild(e)
         }
       })
