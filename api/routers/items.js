@@ -10,5 +10,6 @@ itemsRouter.get('/expiresat/:id', itemsController.bidExpires);
 itemsRouter.post('/newitem',authenticator, itemsController.create);
 itemsRouter.patch('/:id', authenticator, itemsController.update);
 itemsRouter.delete('/:id', authenticator, itemsController.destroy);
+itemsRouter.get("/user/:id", authenticator, itemsController.showItemById)
 
 module.exports = itemsRouter;

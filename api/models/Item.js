@@ -37,6 +37,15 @@ class Item {
         return new Item(response.rows[0]);
     }
 
+
+    static async getOneByUserId(id) {
+        const response = await db.query("SELECT * FROM items_table WHERE user_id = $1;", [id]);
+        if (response.rows.length === 0) {
+            throw new Error("No items available.")
+        }
+        return response.rows.map(g => new Item(g));
+    }
+
     static async getOneByCategory(category) {
         const response = await db.query("SELECT * FROM items_table WHERE category_id = $1;", [category]);
         if (response.rows.length === 0) {
@@ -52,7 +61,8 @@ class Item {
         console.log(response.rows[0])
         const bid = await db.query("INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1,$2,$3)", [user_id, item_id, 0])
         console.log(`Bid created`)
-        return response.rows[0]
+        
+        return [response.rows[0]]
     }
 
     static async updateItem(data, id) {
