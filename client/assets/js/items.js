@@ -261,7 +261,7 @@ document.addEventListener('click', event => {
               name: name.value,
               description: description.value,
               category: await getCategoryByName(category.value),
-              user_id: 1
+              user_id: userID
             };
             console.log(form)
             const options = {
