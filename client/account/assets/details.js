@@ -58,7 +58,6 @@ loadUserDetails();
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("editDetailsButton").addEventListener("click", async (e) => {
         e.preventDefault();
-        
         const email = document.querySelector('#changeUsername');
         const password = document.querySelector('#changePassword');
         const password2 = document.querySelector('#changePassword2');

@@ -68,6 +68,17 @@ async function destroy(req, res) {
     }
 }
 
+async function showItemById(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+        const items = await Item.getOneByUserId(id);
+        res.status(200).send({ data: items });
+
+    } catch (err) {
+        res.status(500).send({ error: err.message })
+    }
+}
+
 module.exports = {
-    index, show, create, destroy, update, title
+    index, show, create, destroy, update, title, showItemById
 }
