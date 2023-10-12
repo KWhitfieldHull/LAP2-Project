@@ -39,12 +39,15 @@ class Item {
     }
 
     static async create(data) {
+        
         const { name, user_id, image_url, description, category_id } = data;
-        const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category_id) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category_id]);
+        const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category_id) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category_id]);        
         const item_id = response.rows[0].item_id
-        const bid = await db.query("INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1,$2,$3)", [user_id, item_id,0])
+        console.log(item_id)
+        const bid = await db.query("INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1,$2,$3)", [user_id, item_id,0])       
         console.log(`Bid created`)
-        return response.rows[0]
+        
+        return [response.rows[0]]
     }
 
     static async updateItem(data, id) {
