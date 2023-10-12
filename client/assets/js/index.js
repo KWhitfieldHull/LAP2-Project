@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <hr>
                             <p class="card-text" id="itemDescription-${item['id']}">${item['description']}</p>
                             <div class="input-group mb-3" id="item${id}">
-                            <label class="input-group-text" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
+                            <label class="input-group-text" id="itemAddBidLabel-${item['id']}" for="itemAddBid-${item['id']}">Max Bid: ${bid}</label>
                             
                               <input type="text" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
                               <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Add</button>
