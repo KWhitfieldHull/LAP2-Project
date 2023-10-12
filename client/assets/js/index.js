@@ -44,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const options = {
         headers: {
           Authorisation: localStorage.getItem("token")
-        },
-        mode: 'cors'
+        }
       }
       const response = await fetch(`http://localhost:3000/bids/${id}`, options);
       const obj = await response.json();

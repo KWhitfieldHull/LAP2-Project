@@ -8,7 +8,12 @@ const itemAddressAdd = document.getElementById('itemAddressAdd')
 
 const getAllCategories = async () => {
   try {
-    const response = await fetch("http://localhost:3000/categories");
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token")
+      }
+    }
+    const response = await fetch("http://localhost:3000/categories", options);
     const obj = await response.json();
     const categories = await obj.data;
     categories.forEach((category) => {
@@ -25,7 +30,12 @@ getAllCategories()
 
 const getCategoryByName = async (category) => {
   try {
-    const response = await fetch(`http://localhost:3000/categories/name/${category}`);
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token")
+      }
+    }
+    const response = await fetch(`http://localhost:3000/categories/name/${category}`, options);
     const obj = await response.json();
     const categories = await obj.data;
     return categories['id'];
@@ -36,24 +46,27 @@ const getCategoryByName = async (category) => {
 
 const getAllItems = async () => {
   try {
-
-    const response = await fetch("http://localhost:3000/items");
+    const options = {
+      headers: {
+        Authorisation: localStorage.getItem("token")
+      }
+    }
+    const response = await fetch("http://localhost:3000/items", options);
     const obj = await response.json();
     const items = await obj.data;
-    items.forEach((item) => {
-      const e = addItem(item)
+    items.forEach(async (item) => {
+      const e = await addItem(item)
       itemsList.appendChild(e)
     })
 
   } catch (err) {
     console.error(err)
-    window.location.assign("login.html")
   }
 };
 getAllItems()
 
 // add item
-const addItem = (item) => {
+const addItem = async (item) => {
   const content = document.createElement('div')
   let id = item['id']
   content.id = `item-${id}`
@@ -142,9 +155,10 @@ document.getElementById("addItemForm").addEventListener("submit", async (e) => {
         const options = {
           method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorisation: localStorage.getItem("token")
           },
-          body: JSON.stringify(form)
+          body: JSON.stringify(form),
         }
         const result = await fetch("http://localhost:3000/items/newitem", options);
         if (result.status == 201) {
@@ -218,7 +232,8 @@ document.addEventListener('click', event => {
             const options = {
               method: "PATCH",
               headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorisation: localStorage.getItem("token")
               },
               body: JSON.stringify(form)
             }
@@ -241,7 +256,7 @@ document.addEventListener('click', event => {
 document.addEventListener('click', (event) => {
   if (event.target.matches(".deleteButton")) {
     const id = (event.target.id).split('-')[1];
-    fetch(`http://localhost:3000/items/${id}`, { method: "DELETE" })
+    fetch(`http://localhost:3000/items/${id}`, { method: "DELETE", headers: { Authorisation: localStorage.getItem("token") } })
       .then(response => {
         document.getElementById(`item-${id}`).classList.add('fade')
         setTimeout(() => {
