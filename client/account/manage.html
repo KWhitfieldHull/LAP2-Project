@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/default.css">
     <script src="../assets/js/bootstrap.min.js" defer></script>
-    <script src="./assets/manage.js" defer></script>
+    <!-- <script src="./assets/manage.js" defer></script> -->
+    <script src="./assets/items.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,6 +60,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">
+    <div id="itemsList"></div>
     <div class="card mb-3 border-0 col-md-8 col-12 p-4 border-bottom" id="item">
           <div class="row g-0">
               <div class="col-md-4">
@@ -155,7 +157,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="login-form">
+        <form id="addItemForm">
           <div class="mb-3">
               <label class="form-label" for="itemNameAdd">Item name:</label>
               <input class="form-control" type="text" id="itemNameAdd" name="itemNameAdd" placeholder="#itemNameAdd">
@@ -166,21 +168,22 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="itemCategoryAdd">Item category:</label>
-              <input class="form-control" type="text" id="itemCategoryAdd" name="itemCategoryAdd" placeholder="#itemCategoryAdd">
+            <select class="form-select" id="itemCategoryAdd">
+              <option selected>#itemCategoryAdd</option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label" for="itemDescriptionAdd">Item description:</label>
               <input class="form-control" type="text" id="itemDescriptionAdd" name="itemDescriptionAdd" placeholder="#itemDescriptionAdd">
           </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label class="form-label" for="itemAddressAdd">Item address:</label>
               <input class="form-control" type="text" id="itemAddressAdd" name="itemAddressAdd" placeholder="#itemAddressAdd">
+          </div> -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-manage" id="addNewItemButton">Save changes</button>
           </div>
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-manage">Save changes</button>
       </div>
     </div>
   </div>
