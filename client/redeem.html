@@ -48,7 +48,7 @@
   </div>
   <header class="py-5 bg-header text-center rounded-3">
       <h1><span id="username"></span>, redeem your points here!</h1>
-      <p>You have <span id="points"></span> points!</p>
+      <p>You have <span id="usernamePoints"></span> points! Get a discount from one of our partners.</p>
   </header>
   <main class="mb-5 flex-grow-1 border-end">
     <div class="py-5 mb-5 bg-body-tertiary">
@@ -66,7 +66,7 @@
       <div class="container h-100 px-4" id="voucherBlock">
         <div class="row">
         <div class="col">
-          <a href="#">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#tenPers">
             <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
               <h3 class="mb-3">10% discount</h3>
               <p>1 voucher per <b>100 points!</b></p>
@@ -74,7 +74,7 @@
           </a>
         </div>
         <div class="col">
-          <a href="#">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#twentyFivePers">
             <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
               <h3 class="mb-3">25% discount</h3>
               <p>1 voucher per <b>250 points!</b></p>
@@ -82,7 +82,7 @@
           </a>
         </div>
         <div class="col">
-          <a href="#">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#thirtyFivePers">
             <div class="p-5 my-4 border d-flex justify-content-center flex-column align-items-center voucher">
               <h3 class="mb-3">35% discount</h3>
               <p>1 voucher per <b>350 points!</b></p>
@@ -93,6 +93,72 @@
     </div>
   </main>
 </div>
+
+<!-- Show 10% voucher -->
+<div class="modal fade" id="tenPers" tabindex="-1" aria-labelledby="tenPersLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Redeem your points | 10%</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+          You have <span id="usernamePoints10"></span> points!
+      </div>
+            <div class="modal-body text-center bg-light border">
+          You can obrain <b><span id="obtainPoints10"></span></b> vouchers!
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-manage" id="redeem10Button">Redeem now!</button>
+      </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Show 25% voucher -->
+<div class="modal fade" id="twentyFivePers" tabindex="-1" aria-labelledby="twentyFivePersLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Redeem your points | 25%</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+          You have <span id="usernamePoints25"></span> points!
+      </div>
+            <div class="modal-body text-center bg-light border">
+          You can obrain <b><span id="obtainPoints25"></span></b> vouchers!
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-manage" id="redeem25Button">Redeem now!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Show 35% voucher -->
+<div class="modal fade" id="thirtyFivePers" tabindex="-1" aria-labelledby="thirtyFivePersLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Redeem your points | 35%</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+          You have <span id="usernamePoints35"></span> points!
+      </div>
+      <div class="modal-body text-center bg-light border">
+          You can obrain <b><span id="obtainPoints35"></span></b> vouchers!
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-manage" id="redeem35Button">Redeem now!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>
 
