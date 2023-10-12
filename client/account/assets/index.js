@@ -1,11 +1,38 @@
 const mainBlock = document.getElementById('mainBlock');
+const userToken = localStorage.getItem("token");
+
+
+async function loadUserDetails() {
+  const form = {
+    token: userToken
+  };
+
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  }
+
+  const response = await fetch("http://localhost:3000/users/token", options);
+  const result = await response.json();
+
+  if (response.status == 201) {
+    if (result.user.admin) {
+      createAccountPage('Admin Area', 'Manage everything', './manage.html')
+
+    }
+    createAccountPage('My Items List', 'Your items list', './items.html')
+    createAccountPage('Account details', 'Edit your details', './details.html')
+  }
+
+}
+
+loadUserDetails();
+
 
 const createAccountPage = (heading = "heading", text = "description", link = "#") => {
-  
-  
-  
-  
-  
   const overallBlock = document.createElement('div');
   const manageBlock = document.createElement('div');
   const manageLink = document.createElement('a');
@@ -24,6 +51,4 @@ const createAccountPage = (heading = "heading", text = "description", link = "#"
   mainBlock.appendChild(overallBlock)
 }
 
-createAccountPage('Admin Area', 'Manage everything', './manage.html')
-createAccountPage('My Items List', 'Your items list', './items.html')
-createAccountPage('Account details', 'Edit your details', './details.html')
+
