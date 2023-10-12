@@ -1,7 +1,6 @@
 const db = require("../database/connect_user")
 
 class Item {
-
     constructor(data) {
         this.id = data.item_id;
         this.name = data.name;
@@ -10,6 +9,7 @@ class Item {
         this.user_id = data.user_id;
         this.image_url = data.image_url;
         this.description = data.description;
+        this.bid_expires = data.bid_expires;
     }
 
     static async getAll() {
@@ -18,6 +18,13 @@ class Item {
             throw new Error("No items available.")
         }
         return response.rows.map(g => new Item(g));
+    }
+    static async getBidExpireByItemId(item_id){
+        const response = await db.query("SELECT bid_expires FROM items_table WHERE item_id =$1;", [item_id])
+        if (response.rows.length === 0){
+            throw new Error("Couldn't locate the item!")
+        }
+        return response.rows[0]
     }
 
 
@@ -49,7 +56,7 @@ class Item {
 
     static async create(data) {
         const { name, user_id, image_url, description, category } = data;
-        const response = await db.query('INSERT INTO items_table (name, user_id, image_url, description, category_id) VALUES ($1, $2, $3 ,$4, $5) RETURNING *;', [name, user_id, image_url, description, category]);
+        const response = await db.query("INSERT INTO items_table (name, user_id, image_url, description, category_id, bid_expires) VALUES ($1, $2, $3 ,$4, $5, NOW() + INTERVAL '5 days') RETURNING *;", [name, user_id, image_url, description, category]);
         const item_id = response.rows[0].item_id
         console.log(response.rows[0])
         const bid = await db.query("INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1,$2,$3)", [user_id, item_id, 0])
