@@ -19,9 +19,9 @@ class Item {
         }
         return response.rows.map(g => new Item(g));
     }
-    static async getBidExpireByItemId(item_id){
+    static async getBidExpireByItemId(item_id) {
         const response = await db.query("SELECT bid_expires FROM items_table WHERE item_id =$1;", [item_id])
-        if (response.rows.length === 0){
+        if (response.rows.length === 0) {
             throw new Error("Couldn't locate the item!")
         }
         return response.rows[0]
@@ -58,10 +58,8 @@ class Item {
         const { name, user_id, image_url, description, category } = data;
         const response = await db.query("INSERT INTO items_table (name, user_id, image_url, description, category_id, bid_expires) VALUES ($1, $2, $3 ,$4, $5, NOW() + INTERVAL '5 days') RETURNING *;", [name, user_id, image_url, description, category]);
         const item_id = response.rows[0].item_id
-        console.log(response.rows[0])
         const bid = await db.query("INSERT INTO bids_table (user_id, item_id, highest_bid) VALUES ($1,$2,$3)", [user_id, item_id, 0])
-        console.log(`Bid created`)
-        
+
         return [response.rows[0]]
     }
 

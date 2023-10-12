@@ -18,9 +18,17 @@ const getAllItems = async () => {
     const response = await fetch(`http://localhost:3000/items/user/${userID}`, options);
     const obj = await response.json();
     const items = await obj.data;
+    if (response.status == 500) {
+      const str = document.createElement('span')
+      str.textContent = 'You have 0 items! Press the button below.'
+      str.classList.add('p-3', 'd-flex', 'justify-content-center', 'justify-content-sm-start')
+      itemsList.appendChild(str)
+    }
     items.forEach(async (item) => {
+
       const e = await addItem(item)
       itemsList.appendChild(e)
+
     })
 
   } catch (err) {
@@ -85,7 +93,6 @@ async function loadUserID() {
 
   if (response.status == 201) {
     userID = result.user.user_id;
-
     getAllItems()
   }
 }
