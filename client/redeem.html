@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: hidden;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand fw-bold" href="./">
       <img src="./assets/img/logo.png" alt="Logo" width="32" height="32" class="d-inline-block">
-      Florin & Burkes Council Recycling Project
+      Florin & Burkes Recycling
     </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,7 @@
     </div>
   </nav>
   </div>
-  <header class="py-5 bg-header text-center rounded-3">
+  <header class="py-5 bg-header text-center">
       <h1><span id="username"></span>, redeem your points here!</h1>
       <p>You have <span id="usernamePoints"></span> points! Get a discount from one of our partners.</p>
   </header>
@@ -109,10 +109,18 @@
             <div class="modal-body text-center bg-light border">
           You can obrain <b><span id="obtainPoints10"></span></b> vouchers!
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" class="btn btn-manage" id="redeem10Button">Redeem now!</button>
-      </div>
-        
+      <form id="redeemForm10">
+        <div class="modal-body text-center">
+          <div class="col-md-8 col-12 offset-md-2">
+            <label for="redeem10" class="form-label">We will send your vouchers on email</label>
+            <input type="email" class="form-control redeemButton has-validation" id="redeem10" placeholder="Enter your email" required>
+          </div>
+          
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-manage" id="redeem10Button">Redeem now!</button>
+        </div>
+      </form>
       </div>
     </div>
   </div>
@@ -132,9 +140,18 @@
             <div class="modal-body text-center bg-light border">
           You can obrain <b><span id="obtainPoints25"></span></b> vouchers!
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" class="btn btn-manage" id="redeem25Button">Redeem now!</button>
-      </div>
+            <form id="redeemForm25">
+        <div class="modal-body text-center">
+          <div class="col-md-8 col-12 offset-md-2">
+            <label for="redeem25" class="form-label">We will send your vouchers on email</label>
+            <input type="email" class="form-control redeemButton has-validation" id="redeem25" placeholder="Enter your email" required>
+          </div>
+          
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-manage" id="redeem25Button">Redeem now!</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -152,14 +169,21 @@
       <div class="modal-body text-center bg-light border">
           You can obrain <b><span id="obtainPoints35"></span></b> vouchers!
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" class="btn btn-manage" id="redeem35Button">Redeem now!</button>
-      </div>
+            <form id="redeemForm35">
+        <div class="modal-body text-center">
+          <div class="col-md-8 col-12 offset-md-2">
+            <label for="redeem35" class="form-label">We will send your vouchers on email</label>
+            <input type="email" class="form-control redeemButton has-validation" id="redeem35" placeholder="Enter your email" required>
+          </div>
+          
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-manage" id="redeem35Button">Redeem now!</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-
 </body>
 </html>
 

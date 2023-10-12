@@ -62,15 +62,15 @@ async function destroy(req, res) {
         res.status(404).json({ "error": err.message })
     }
 }
-async function bidExpires(req,res){
-    try{
+async function bidExpires(req, res) {
+    try {
         //item_id
         const item_id = parseInt(req.params.id)
         const expiresAt = await Item.getBidExpireByItemId(item_id);
-        console.log((expiresAt.bid_expires))
+        // console.log((expiresAt.bid_expires))
         res.status(200).send(expiresAt)
-    }catch(error){
-        res.status(404).json({"error": error.message})
+    } catch (error) {
+        res.status(404).json({ "error": error.message })
     }
 }
 
