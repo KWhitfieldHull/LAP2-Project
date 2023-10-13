@@ -78,7 +78,7 @@ To start this app:
 ---
 
 ## What We Learned From The Project​
-[]()
+![img](https://github.com/KWhitfieldHull/LAP2-Project/blob/main/client/assets/img/rm-wwl.jpg?raw=true)
 
 ---
 ## Future features
