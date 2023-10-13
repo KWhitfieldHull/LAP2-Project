@@ -1,5 +1,5 @@
 # Florin & Burkes Recycling - Lap 2 project
-
+![img](https://raw.githubusercontent.com/KWhitfieldHull/LAP2-Project/main/client/assets/img/rm-main.jpg)
 
 Try-Catch-A-Cold team:
 - Kieran Whitfield (PM, Testing)
@@ -66,8 +66,6 @@ To start this app:
 ## Frontend
 - Created relevant html tags with classes and IDs so that they can be used in the frontend code
 - Styled all the pages using the latest version of bootstrap - Version 5.3.1
-- 
-- 
 
 ## Testing
 - Set up the framework for the testing, in this case, jest and supertest
