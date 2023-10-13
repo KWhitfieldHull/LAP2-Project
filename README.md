@@ -1,15 +1,21 @@
 # Florin & Burkes Recycling - Lap 2 project
 
+
 Try-Catch-A-Cold team:
 - Kieran Whitfield (PM, Testing)
 - Vadim Zotov​ (Front End Developer​)
 - Adil Wadud​ (Integration Developer​)
 - Ildiko Magda​ (Back End Developer​)
 
-## Description 
+## Purpose Of The Project​ 
+| Action | Explanation |
+| --- | --- |
+| **Reduce** | The amount of reusable items wasted​ |
+| **Educate** | The community about recycling​ |
+| **Encourage** | Community togetherness​ |
+| **Promote** | Sustainable recycling​ |
+| **Support** | People through the cost of living crisis​ |
 
-
-A habit tracking website for training E-Sports athletes, keeping track of tasks for individual games.
 
 ---
 
@@ -34,77 +40,50 @@ To start this app:
 - Create a new account
 - Login with your name/password
 - Now you can donate for any item
+- You also can add new items!
 
 # Technologies 
 
 - HTML
-- CSS (Bootstrap) 
-- JavaScript 
+- CSS (Bootstrap 5.3)
+- JavaScript
   - Node.js
   - Express
-  - Cors
   - Jest 
   - Supertest
-  - EJS
-  - Axios
-  - Mongoose
-  - Json Web Token
   - Bcrypt
-- MongoDB/MongoDB Atlas
+- SQL
 ---
 
 # Process
+## Backend
 
-[How did you go about creating this project]
-
-Initial planning
-- Discussed roles - front end vs back end tasks
-- Agreed on MongoDB
+## Frontend
+- Created relevant html tags with classes and IDs so that they can be used in the frontend code
+- Styled all the pages using the latest version of bootstrap - Version 5.3.1
+- 
 - 
 
-Understanding the problem 
-- Visualised our target demographic and our user story
-
-Project planning
-- Created issues in Github Projects Kanban board
-- Discussed timelines and blockers in daily standup
-
-Design planning 
-- As a group, looked at gaming websites such as Razer.com
-- Analysed aspects we liked from the website and discussed on Figma
-- Front end team drew up Figma wireframe
-
-Organising and planning 
-- Shared screen on Slack and worked together using pair programming and mob programming
-- Daily standup with team and engineering trainers
+## Testing
 
 ---
 
-# Wins & Challenges
-
-## Wins
-- Deployed final project on Heroku: https://apex-io.herokuapp.com/
-- We all learned EJS and MongoDB
-
-## Challenges
-- Testing
-- JSON syntax
-- MongoDB queries
+## Challenges and Solutions​
+| Challange | Solution |
+| --- | --- |
+| We wanted to make sure that the ​User can see the images of Items in our database | We created a function that reduces the size and quality then converts the image to a database friendly string​ |
+| Handling donations had become challenging as it required potentially a POST and a PATCH method simultaneously | Items are created with a initial bid of £0, which meant that a POST function was not required |
+| The size of the project increased quickly and files and folders become very messy | We continuously communicated, pushed/pulled and removed unnecessary files​ |
 
 ---
 
-# Bugs (that still exist)
-
-- None
-
----
-# Final
-![Final Apex.io website](/public/images/final.png)
+## What We Learned From The Project​
+[]()
 
 ---
-
-# Licence 
-
-- MIT Licence 
-
-Copyright 2023
+## Future features
+- Deployment​
+- Payment Handling​
+- WebSockets
+- Sign up Via Gmail​
+- Instant Buy ​
