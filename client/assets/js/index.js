@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="${item['image_url']}" class="img-fluid rounded-start" title="#itemImg-${item['id']}" id="itemImg-${item['id']}">
+                        <div class="col-md-4 text-center">
+                        <img src="${item['image_url']}" class="img-fluid" title="#itemImg-${item['id']}" id="itemImg-${item['id']}">
                         </div>
                         <div class="col-md-8">
                         <div class="card-body">
@@ -158,8 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="input-group mb-3" id="item${item['id']}">
                             <label class="input-group-text" for="itemAddBid-${item['id']}">Current:&nbsp;£<span id="currentBid-${item['id']}">${bid}</span></label>
                             
-                              <input type="number" class="form-control" id="itemAddBid-${item['id']}" placeholder="Your bid" aria-label="Your bid" aria-describedby="temAddButton-${item['id']}">
-                              <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Bid</button>
+                              <input type="number" class="form-control" id="itemAddBid-${item['id']}" placeholder="£0" aria-label="Your donation" aria-describedby="temAddButton-${item['id']}">
+                              <button type="button" class="btn btn-add shadow-sm text-white addItemButton" id="itemAddButton-${item['id']}">Donate</button>
                             </div>
                             <div id="countdown-${item['id']}">${setInterval(async () => await countDownFunction(item['id']), 1000)}</div>
                         </div>
@@ -263,10 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentBid >= bidValue) {
               document.getElementById(bidID).value = ''
               document.getElementById(bidID).placeholder = 'Too Small'
-              document.getElementById(bidID).style.backgroundColor = '#ff4949'
+              document.getElementById(bidID).style.backgroundColor = '#A01300'
               setTimeout(() => {
                 document.getElementById(bidID).style.transition = '.5s'
-                document.getElementById(bidID).placeholder = 'Your Bid'
+                document.getElementById(bidID).placeholder = '£0'
                 document.getElementById(bidID).style.backgroundColor = 'white'
               }, 1000);
 

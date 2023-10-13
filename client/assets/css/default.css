@@ -9,7 +9,21 @@ body {
     display: flex;
     flex-direction: column;
     background: url('../img/bg.png') no-repeat bottom center;
-    ;
+    background-size: cover;
+}
+
+.leftCategories {
+    border-right: 1px solid rgb(222, 226, 230);
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        background: none;
+    }
+
+    .leftCategories {
+        border-right: none;
+    }
 }
 
 #loader .bar {
