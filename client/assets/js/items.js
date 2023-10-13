@@ -116,8 +116,8 @@ const addItem = async (item) => {
   content.innerHTML = `
             <div class="card mb-3 border-0 col-lg-8 col-12 p-4 border-bottom item-${item['id']}">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="${item['image_url']}" class="img-fluid rounded-start" title="#itemImg-${item['id']}" id="itemImg-${item['id']}">
+                        <div class="col-md-4 text-center">
+                        <img src="${item['image_url']}" class="img-fluid" title="#itemImg-${item['id']}" id="itemImg-${item['id']}">
                         </div>
                         <div class="col-md-8">
                         <div class="card-body">
@@ -305,6 +305,7 @@ document.addEventListener('click', (event) => {
           document.querySelector(`.item-${id}`).remove()
         }, "300");
         response.json()
+        window.location.reload()
       });
 
   }
