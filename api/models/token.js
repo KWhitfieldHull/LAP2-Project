@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 
-const db = require("../database/connect_user");
+const db = require("../database/connect");
 
 class Token {
 

@@ -1,4 +1,4 @@
-const db = require("../database/connect_user")
+const db = require("../database/connect")
 
 class Reward {
     constructor({user_id, username, points, admin}){

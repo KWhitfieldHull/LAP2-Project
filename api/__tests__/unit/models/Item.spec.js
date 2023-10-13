@@ -1,5 +1,5 @@
 const Item = require("../../../models/Item")
-const db = require("../../../database/connect_user")
+const db = require("../../../database/connect")
 
 
 

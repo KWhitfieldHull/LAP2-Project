@@ -70,7 +70,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:api\database\connect_user.js
+SF:api\database\connect.js
 FNF:0
 FNH:0
 DA:1,2

@@ -25,10 +25,10 @@ Try-Catch-A-Cold team:
 
 To start this app:
 
-- In terminal git clone the repository to local machine
-- In terminal cd LAP2-Project to enter the required server
-- In terminal `npm install` to have all the required packages
-- You need .env file with PORT and DB_URL
+- In terminal git clone the repository to your local machine
+- In terminal `cd LAP2-Project` to enter the directory
+- In terminal `npm install` to install the required packages
+- You will need a .env file containing the PORT and DB_URL you wish to use
 - For DB url create an intense at elephantsql.com
 - In terminal `npm run setup-db` to install the Database
 - In terminal `npm run dev` to run backend server
@@ -65,11 +65,14 @@ To start this app:
 - 
 
 ## Testing
-
+- Set up the framework for the testing, in this case, jest and supertest
+- Created initial tests for functionality of items
+- Iterated on these tests to make them function more accurately
+- Repeated this with all other controllers and models
 ---
 
 ## Challenges and Solutions​
-| Challange | Solution |
+| Challenge | Solution |
 | --- | --- |
 | We wanted to make sure that the ​User can see the images of Items in our database | We created a function that reduces the size and quality then converts the image to a database friendly string​ |
 | Handling donations had become challenging as it required potentially a POST and a PATCH method simultaneously | Items are created with a initial bid of £0, which meant that a POST function was not required |
