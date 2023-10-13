@@ -29,18 +29,23 @@ To start this app:
 - In terminal `cd LAP2-Project` to enter the directory
 - In terminal `npm install` to install the required packages
 - You will need a .env file containing the PORT and DB_URL you wish to use
-- For DB url create an intense at elephantsql.com
-- In terminal `npm run setup-db` to install the Database
-- In terminal `npm run dev` to run backend server
-- In your VSCode open index.html with Live Server extention
+- If you do not have a DB_URL ready, you can create one using the website [ElephantSQL](https://www.elephantsql.com/)
+- In terminal `npm run setup-db` to setup the database for use
+- In terminal `npm run dev` to start up a local server
+- Using Visual Studio Code, install the Live Server extension if you do not have it installed
+- Open index.html using Live Server by right clicking the file in the VSCode explorer
 
 ## Usage
 
 ---
-- Create a new account
-- Login with your name/password
-- Now you can donate for any item
-- You also can add new items!
+- Sign up to the website and then log in with your newly created credentials
+- On the main page, you can filter for items by category and donate to any items that you like the look of
+- On the "ask about recycling" page, you can enter any text and you will be told whether or not the item is able to be recycled or not
+- On the account page, you can view your account details or view your personal list of items.
+- On the account details page, you have the option to edit your account alongside having the ability to spend your points gained
+- On the redeem page, you can choose which voucher you would like to purchase using your points
+- On the account items page, you can view all items you currently have the highest donation to. It also allows you to post new items to the site !
+- At any time, you can log out of the website, which will take you back to the login screen
 
 # Technologies 
 
