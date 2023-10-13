@@ -28,8 +28,9 @@ To start this app:
 - In terminal git clone the repository to your local machine
 - In terminal `cd LAP2-Project` to enter the directory
 - In terminal `npm install` to install the required packages
-- You will need a .env file containing the PORT and DB_URL you wish to use
+- You will need a .env file containing the PORT and DB_URL and the OPENAI_KEY you wish to use
 - If you do not have a DB_URL ready, you can create one using the website [ElephantSQL](https://www.elephantsql.com/)
+- If you do not have OPENAI_KEY ready, you can create one using the website [OpenAI](https://openai.com/blog/openai-api)
 - In terminal `npm run setup-db` to setup the database for use
 - In terminal `npm run dev` to start up a local server
 - Using Visual Studio Code, install the Live Server extension if you do not have it installed
@@ -62,6 +63,12 @@ To start this app:
 
 # Process
 ## Backend
+
+The backend functionality was created using the MVC model and was further broken down into key functionalities 
+- Created database schema, database itself and added it to the project
+- Created User/ login / Authorisation
+- Created core functionalities related to items, reward points and bids
+- Created backend functions to handle extensions such as; recycle api, countdowns, redeem points etc
 
 ## Frontend
 - Created relevant html tags with classes and IDs so that they can be used in the frontend code
