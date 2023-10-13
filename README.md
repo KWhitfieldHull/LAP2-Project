@@ -53,6 +53,7 @@ To start this app:
   - Supertest
   - Bcrypt
 - SQL
+- ChatGPT
 ---
 
 # Process
@@ -60,9 +61,7 @@ To start this app:
 
 ## Frontend
 - Created relevant html tags with classes and IDs so that they can be used in the frontend code
-- Styled all the pages using the latest version of bootstrap - Version 5.3.1
-- 
-- 
+- Styled all the pages using the latest version of bootstrap - Version 5.3.1 
 
 ## Testing
 
