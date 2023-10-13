@@ -15,6 +15,7 @@ const redeemForm10 = document.getElementById('redeemForm10')
 const redeemForm25 = document.getElementById('redeemForm25')
 const redeemForm35 = document.getElementById('redeemForm35')
 
+
 let userID;
 async function loadUserDetails() {
 
@@ -48,12 +49,52 @@ async function loadUserDetails() {
 loadUserDetails();
 
 
-redeemForm10.addEventListener('submit', () => {
-  alert('Thank you!')
+
+
+
+
+
+
+
+//REDEEM
+
+async function redeemCode(percentage) {
+
+  const form = {
+    value: percentage
+  };
+
+  const options = {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  }
+  const response = await fetch(`http://localhost:3000/account/redeem/${userID}`, options);
+  const result = await response.json();
+
+  if (response.status == 200) {
+    return result;
+  }
+}
+
+
+redeemForm10.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const code = await redeemCode(10);
+  alert(code);
+  window.location.reload();
 })
-redeemForm25.addEventListener('submit', () => {
-  alert('Thank you!')
+redeemForm25.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const code = await redeemCode(25);
+  alert(code);
+  window.location.reload()
 })
-redeemForm35.addEventListener('submit', () => {
-  alert('Thank you!')
+redeemForm35.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const code = await redeemCode(35);
+  alert(code);
+  window.location.reload()
 })

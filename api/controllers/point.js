@@ -64,7 +64,7 @@ async function redeem(req, res) {
             //send unique voucher
             const newVoucher = makeVoucher(20)
             // console.log(newVoucher)
-            res.status(200).send(newVoucher);
+            res.status(200).json(newVoucher);
             //return success
             //res.status(200).json(updatedPoints)
         } else {
