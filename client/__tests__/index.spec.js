@@ -9,9 +9,9 @@ describe("index.html", () => {
         document = await dom.window.document
 
     })
-    it("H1 displays Florin & Burkes Recycling", () => {
+    it("H1 displays Florin & Burkes", () => {
         const h1 = document.querySelector("h1")
-        expect(h1.innerHTML).toContain("Florin & Burkes Recycling")
+        expect(h1.innerHTML).toContain("Florin & Burkes")
     })
 
     it("Has a logo", () => {
