@@ -63,7 +63,7 @@ async function redeem(req, res) {
             const updatedPoints = await Reward.updatePoints(newPoints, id)
             //send unique voucher
             const newVoucher = makeVoucher(20)
-            res.status(200).send(newVoucher);
+            res.status(200).json(newVoucher);
         } else {
             // not enough points error
             res.status(403).send("The redeemed value is not valid or not enough points to redeem")
