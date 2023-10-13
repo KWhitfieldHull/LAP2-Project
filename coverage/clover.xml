@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1697104914867" clover="3.2.0">
-  <project timestamp="1697104914867" name="All files">
-    <metrics statements="80" coveredstatements="64" conditionals="12" coveredconditionals="4" methods="15" coveredmethods="14" elements="107" coveredelements="82" complexity="0" loc="80" ncloc="80" packages="3" files="3" classes="3"/>
+<coverage generated="1697189764031" clover="3.2.0">
+  <project timestamp="1697189764031" name="All files">
+    <metrics statements="97" coveredstatements="64" conditionals="16" coveredconditionals="4" methods="20" coveredmethods="14" elements="133" coveredelements="82" complexity="0" loc="97" ncloc="97" packages="3" files="3" classes="3"/>
     <package name="controllers">
-      <metrics statements="36" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5"/>
-      <file name="items.js" path="E:\Work\actual big boy gamer work\LAP2\Project\LAP2-Project\api\controllers\items.js">
-        <metrics statements="36" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5"/>
+      <metrics statements="46" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="5"/>
+      <file name="items.js" path="E:\Work\actual big boy gamer work\LAP2\Project\Main\LAP2-Project\api\controllers\items.js">
+        <metrics statements="46" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
@@ -23,6 +23,10 @@
         <line num="33" count="2" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
@@ -30,23 +34,29 @@
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="61" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
       </file>
     </package>
     <package name="database">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="connect_user.js" path="E:\Work\actual big boy gamer work\LAP2\Project\LAP2-Project\api\database\connect_user.js">
+      <file name="connect_user.js" path="E:\Work\actual big boy gamer work\LAP2\Project\Main\LAP2-Project\api\database\connect_user.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -55,10 +65,11 @@
       </file>
     </package>
     <package name="models">
-      <metrics statements="40" coveredstatements="28" conditionals="12" coveredconditionals="4" methods="9" coveredmethods="9"/>
-      <file name="Item.js" path="E:\Work\actual big boy gamer work\LAP2\Project\LAP2-Project\api\models\Item.js">
-        <metrics statements="40" coveredstatements="28" conditionals="12" coveredconditionals="4" methods="9" coveredmethods="9"/>
+      <metrics statements="47" coveredstatements="28" conditionals="16" coveredconditionals="4" methods="12" coveredmethods="9"/>
+      <file name="Item.js" path="E:\Work\actual big boy gamer work\LAP2\Project\Main\LAP2-Project\api\models\Item.js">
+        <metrics statements="47" coveredstatements="28" conditionals="16" coveredconditionals="4" methods="12" coveredmethods="9"/>
         <line num="1" count="2" type="stmt"/>
+        <line num="5" count="11" type="stmt"/>
         <line num="6" count="11" type="stmt"/>
         <line num="7" count="11" type="stmt"/>
         <line num="8" count="11" type="stmt"/>
@@ -70,34 +81,40 @@
         <line num="17" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="18" count="1" type="stmt"/>
         <line num="20" count="3" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="25" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
         <line num="54" count="1" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="76" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="78" count="2" type="stmt"/>
+        <line num="79" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
       </file>
     </package>
   </project>

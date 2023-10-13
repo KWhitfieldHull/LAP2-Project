@@ -20,7 +20,7 @@ const getAllItems = async () => {
     const items = await obj.data;
     if (response.status == 500) {
       const str = document.createElement('span')
-      str.textContent = 'You have 0 items! Press the button below.'
+      str.textContent = 'You do not currently have any items! Press the button below to add a new item.'
       str.classList.add('p-3', 'd-flex', 'justify-content-center', 'justify-content-sm-start')
       itemsList.appendChild(str)
     }
